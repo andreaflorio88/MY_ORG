@@ -1,4 +1,4 @@
-public class AccountClass { 
+public class AccountClass {
 	
     // Id 
     // String 

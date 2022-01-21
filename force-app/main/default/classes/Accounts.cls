@@ -26,4 +26,5 @@ public class Accounts extends fflib_SObjectDomain{
         fflib_SObjectUnitOfWork uow = new fflib_SObjectUnitOfWork(New Schema.SObjectType[] {Account.SObjectType});
         uow.registerDirty(updatedAccounts);
     }
+    
 }

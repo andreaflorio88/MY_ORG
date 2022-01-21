@@ -19,7 +19,7 @@
     <aura:attribute name="message" type="string" />    
     <aura:attribute name="key" type="string" default="" />
     <aura:attribute name="mode" type="string" default="dismissable" />
-    <aura:attribute name="duration" type="string" default="10" />
+    <aura:attribute name="duration" type="string" default="7" />
     <aura:attribute name="urlLink" type="string" />
     <aura:attribute name="urlLabel" type="string" />
-</aura:component>
+</aura:component> 

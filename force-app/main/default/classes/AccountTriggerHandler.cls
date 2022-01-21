@@ -2,7 +2,7 @@ public class AccountTriggerHandler {
 	
     public static void beforeInsertChecks(List<Account> accounts){
               
-    }   
+    }
     
     public static void beforeUpdateChecks(List<Account> accounts){
         
