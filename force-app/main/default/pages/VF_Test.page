@@ -1,0 +1,66 @@
+<apex:page showHeader="false" standardStylesheets="false">
+    <html>
+        <head>
+            <body>
+             
+            <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+            <script type="text/javascript" src="//mc.s10.exacttarget.com/cloudpages/utilities/t.js"></script>
+            <script type="text/javascript">var ctx=new Fuel.TrackingContext(100015657,100014861);var t=new Fuel.Tracking(ctx,{siteid:'138277',pageid:'392',isMobile:'false'});t.wrapLinks(null,'CLOUDPAGESCLICK');t.addRawEvent('CLOUDPAGESVISIT',{pageid:'392'});t.send();</script>
+            <script type="text/javascript">window.contentDetail={"isSite":true,"mid":100015657,"eid":100014861,"pageID":392,"siteID":138277,"isMobile":false};</script>
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    $('.submit-button').prop('disabled', true);
+                });
+
+
+                function onChangeStatusCheckbox(idButton,idMarketResearch){
+                    if(document.getElementById(idMarketResearch).checked == true){
+                        document.getElementById(idButton).removeAttribute('disabled');
+                    }else{
+                        document.getElementById(idButton).setAttribute('disabled','disabled');
+                    };
+                }
+            </script>
+       
+                                                                    <apex:outputPanel id="mainPanel">
+                                                                        <apex:form > 
+                                                                            <h1 style="color:#202020;font-family:'noto sans';font-size:28px;font-style:normal;font-weight:bold;line-height:1; margin-bottom: 40px;">
+                                                                                Ci dispiace sapere che non vuoi più ricevere informazioni su IQOS.
+                                                                            </h1>
+                                                                            <br/><br/>
+                                                                            <div class="box-line" style="">
+                                                                                <div class="color-line"></div>
+                                                                            </div>
+                                                                            
+                                                                            <div style="text-align:center; ">
+                                                                                <div style="text-align:left; DISPLAY:TABLE; margin: 0 auto">
+                                                                                    
+                                                                                    <apex:inputCheckbox id="idMarketResearch"  onchange="onChangeStatusCheckbox('{!$Component.btnchange}','{!$Component.idMarketResearch}')"/>
+                                                                                    
+                                                                                  
+                                                                                </div>
+                                                                            </div>
+                                                                            <br/>
+                                                                            <p style="font-family: 'Noto Sans'">
+                                                                                Se in futuro cambierai idea e vorrai di nuovo ricevere comunicazioni e offerte speciali, ti basterà accedere
+                                                                                <a alias="" conversion="false" href="https://it.iqos.com/?return_url=index.php%3Fdispatch%3Dprofiles.update" style="color:#D6A76F;text-decoration:none;" title="">al tuo profilo</a>
+                                                                                su IQOS.COM e riattivare l’opzione relativa.
+                                                                                <br/><br/>
+                                                                                <apex:commandButton id="btnchange" value="Avanti" styleClass="submit-button"  title="Cliccami" />
+                                                                            </p>
+                                                                        </apex:form>
+                                                                    </apex:outputPanel>
+                                                                    <apex:outputPanel >
+                                                                        <h1 style="color:#202020;font-family:'noto sans';font-size:28px;font-style:normal;font-weight:bold;line-height:1; margin-bottom: 40px;">
+                                                                            CONGRATULAZIONI TI SEI DISISCRITTO
+                                                                        </h1>
+                                                                        <br/><br/>
+                                                                        <div class="box-line" style="">
+                                                                            <div class="color-line"></div>
+                                                                        </div>
+                                                                    </apex:outputPanel>
+            </body>
+                                                                    
+        </head>
+    </html>
+</apex:page>

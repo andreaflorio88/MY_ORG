@@ -1,0 +1,29 @@
+<aura:component implements="force:hasRecordId,flexipage:availableForRecordHome,force:appHostable">
+    <aura:attribute name="datas" type="Object[]"/>
+    <aura:attribute name="header" type="String[]"/>
+    
+    <aura:handler name="dataChanged" event="c:DataTableChanged" action="{!c.handleDataChanged}"/>
+    
+	<table class="slds-table slds-table_bordered slds-table_cell-buffer">
+        <thead>
+            <tr class="slds-text-title_caps">
+                <th scope="col"><div class="slds-truncate" title="Index">Index</div></th>
+                <aura:iteration items="{!v.header}" var="head">
+                    <th scope="col"><div class="slds-truncate" title="{!head}">{!head}</div></th>
+                    <!--
+                        <th scope="col"><div class="slds-truncate" title="FirstName">FirstName</div></th>
+                        <th scope="col"><div class="slds-truncate" title="LastName">LastName</div></th>
+                        <th scope="col"><div class="slds-truncate" title="Email">Email</div></th>
+    				-->
+                </aura:iteration>
+            </tr>
+        </thead>
+        <tbody>
+            <aura:iteration items="{!v.datas}" var="data" indexVar="index">
+                
+                <c:TableRow data="{!data}" columsList="{!v.header}" myindex="{!index}"/>
+                
+            </aura:iteration>
+        </tbody>
+    </table>
+</aura:component>

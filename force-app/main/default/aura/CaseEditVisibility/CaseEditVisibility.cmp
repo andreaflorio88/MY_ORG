@@ -1,0 +1,36 @@
+<aura:component implements="force:appHostable,flexipage:availableForRecordHome,force:hasRecordId" controller="CaseEditVisibilityClass">    
+    <lightning:notificationsLibrary aura:id="notifLib"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler name="destroy" value="{!this}" action="{!c.handleDestroy}"/>
+    <aura:attribute name="data" type="Object"/>
+    <aura:attribute name="columns" type="List"/>
+    <aura:attribute name="showModal" type="Boolean"/>
+    <aura:attribute name="lockedBy" type="String"/>
+    <aura:attribute name="lockedAt" type="String"/>
+    
+    <aura:if isTrue="{!v.showModal}">        
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="modalContainer">
+                <header class="slds-modal__header closeButton">                        
+                    <lightning:icon class="closeButtonIcon" iconName="action:close" onclick="{!c.closeModal}"/>
+                    <span class="slds-assistive-text">Close</span>                                         
+                </header>
+                <div class="slds-modal__content slds-p-around_medium redBackground" id="modal-content-id-1">
+                    
+                    <p class="modalContent">{!$Label.c.CaseLocked} 
+                        <br/><br/>
+                        <span class="modalText">{!v.lockedBy}</span>&nbsp;&nbsp;dal&nbsp;&nbsp;
+                        <span class="modalText">{!v.lockedAt}</span>
+                    </p>
+                    
+                    <div class="imgContainer">
+                        <img class="img" src="{!$Resource.Einstein}"/>
+                    </div>                        
+                    
+                </div>                   
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>       
+    </aura:if>
+    
+</aura:component>

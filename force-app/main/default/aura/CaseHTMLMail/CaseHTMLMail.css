@@ -1,0 +1,20 @@
+.THIS.titleHTML {
+    margin: 0 0 .5rem 1.5rem;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.THIS.subject {
+    margin: 0 0 .5rem 1.5rem;
+    font-weight: bold;
+}
+
+.THIS.container {
+    margin: 0 1.5rem 1.5rem 1.5rem;
+    height: 30rem;
+    overflow: scroll;
+}
+
+.THIS.containerDescription{
+     margin: 0 1.5rem 1.5rem 1.5rem;
+}

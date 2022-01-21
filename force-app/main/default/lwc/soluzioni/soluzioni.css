@@ -1,0 +1,42 @@
+.menuItem{
+    color: #00396b;
+}
+
+.yearDropdown{
+    width: 40%;
+    margin-bottom: 1rem;
+}
+
+.buttonContainer{
+    margin-top: 1rem;
+    width: 100%;
+}
+
+.customCard{
+    background: white;
+    border-radius: .3rem
+}
+
+.customGrid{
+    background: #f3f2f2;
+    border-top-left-radius: .3rem;
+    border-top-right-radius: .3rem;
+}
+
+.customIcon{
+    margin-top: -.7rem;
+}
+
+.customTitle{
+    margin-bottom: 1.2rem;
+    margin-top: .5rem;
+}
+
+.solutionContainer{
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.footerDiv{
+    height: .75rem;
+}

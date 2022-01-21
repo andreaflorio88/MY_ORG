@@ -1,0 +1,16 @@
+<aura:component controller="listViewController">
+	<aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+	<aura:attribute name="AccountListViewList" type="ListView[]"/>
+	<aura:attribute name="AccountList" type="Account[]"/>
+    <aura:attribute name="mycolumns" type="List"/>
+	
+	<ui:inputSelect class="slds-select" aura:id="selectedViewId" label="Account View" change="{!c.getFilteredAccount}">
+	    <aura:iteration items="{!v.AccountListViewList}" var="listview">
+	        <ui:inputSelectOption text="{!listview.Id}" label="{!listview.Name}"/>
+	    </aura:iteration>
+	</ui:inputSelect>
+    
+    <lightning:datatable data="{!v.AccountList}"
+        columns="{!v.mycolumns }"
+        keyField="id"/>
+</aura:component>

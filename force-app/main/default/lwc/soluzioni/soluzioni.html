@@ -1,0 +1,104 @@
+<template>
+
+    <template if:true={showConsumiTable}>
+        <div>
+            <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_large" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1">
+
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header slds-modal__header_empty">
+                        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title={label.Close} onclick={closeConsumiTable}>
+                                <lightning-icon icon-name="utility:close" alternative-text={label.Close} variant="inverse"></lightning-icon>
+                        <span class="slds-assistive-text">{label.Close}</span>
+                        </button>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium" style="height: 270px;" id="modal-content-id-1">
+
+                        <div class="yearDropdown">
+                            <lightning-combobox
+                                name="annoDiRiferimento"
+                                label="Anno di riferimento:"
+                                value={selectedYear}
+                                onchange={handleYearChange}
+                                options={yearOptions}
+                                variant="label-inline">
+                            </lightning-combobox>
+                        </div>
+
+                        <div>
+                            <lightning-datatable
+                                draft-values={editedConsumiData}
+                                data={consumiData}
+                                columns={consumiColumns}
+                                key-field="id"
+                                oncellchange={handleCellChange}
+                                min-column-width="120"
+                                hide-checkbox-column="true"
+                                show-row-number-column="false"
+                                onsave={saveEditedValues}
+                                >
+                            </lightning-datatable>
+                        </div>
+
+                        <!-- <template if:true={showButtons}>
+                            <div align="center" class="buttonContainer">
+                                <lightning-button variant="neutral" label={label.Cancel} title="Cancel" class="slds-m-left_x-small" onclick={resetTable}></lightning-button>
+                                <lightning-button variant="brand" label={label.Save} title="Save" class="slds-m-left_x-small" onclick={saveEditedValues}></lightning-button>
+                            </div>
+                        </template> -->
+
+                    </div>
+                </div>
+            </section>
+
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </div>
+    </template>
+
+    <article class="slds-card_boundary customCard">
+        <div class="card-container">
+
+            <div class="slds-card__header slds-grid customGrid">
+                <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                    <div class="slds-media__figure customIcon">
+                        <div class="slds-icon_container" title={label.Solutions_and_usages}>
+                            <lightning-icon icon-name="standard:all" alternative-text={label.Solutions_and_usages} title={label.Solutions_and_usages} size="small"></lightning-icon>
+                            <div>
+                                <span class="slds-assistive-text">{label.Solutions_and_usages}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-media__body customTitle">
+                        <h2 class="slds-card__header-title">
+                            <a href="javascript:void(0);" class="slds-card__header-link slds-truncate" title="Gestione Soluzioni e Consumi">
+                                <span class="slds-text-heading_small">{label.Solutions_and_usages} ({soluzioni.length})</span>
+                            </a>
+                        </h2>
+                    </div>
+                </header>
+
+                <div class="slds-no-flex">
+                    <lightning-button-menu alternative-text="Show menu" menu-alignment="right" variant="border-filled" icon-size="x-small">
+                        <lightning-menu-item value={label.New_solution} label={label.New_solution} class="menuItem" onclick={redirectToNew}></lightning-menu-item>
+                        <lightning-menu-item value={label.Manage_usages} label={label.Manage_usages} class="menuItem" onclick={openConsumiTable}></lightning-menu-item>
+                    </lightning-button-menu>
+                </div>
+
+            </div>
+
+            <div class="slds-card__body">
+
+                <div class="solutionContainer">
+                    <template for:each={soluzioni} for:item="soluzione">
+                        <c-opportunity-soluzione-top-client key={soluzione.Id} soluzione={soluzione} onclicksoluzione={handleClickSoluzione}></c-opportunity-soluzione-top-client>
+                    </template>
+                </div>
+
+            </div>
+        </div>
+
+        <template if:true={showFooter}>
+           <div class="footerDiv"></div>
+        </template>
+    </article>
+
+</template>

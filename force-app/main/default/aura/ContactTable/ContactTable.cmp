@@ -1,0 +1,31 @@
+<aura:component controller="ContactTable" implements="force:hasRecordId,flexipage:availableForRecordHome,force:appHostable">
+    
+    <aura:attribute name="data" type="Object"/>
+    <aura:attribute name="columns" type="List"/>
+    <aura:attribute name="contactRecord" type="Object"/>
+    <aura:attribute name="recordLoadError" type="String"/>
+    <aura:attribute name="contacts" type="Contact[]" default="[]" />
+    <aura:attribute name="account" type="Account" />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler event="force:refreshView" action="{!c.doInit}"/> 
+    <aura:handler name="change" value="{!v.contacts}" action="{!c.showMessage}"/> 
+    
+    
+     <force:recordData aura:id="recordLoader"
+        fields="FirstName,LastName,Email__c,Phone"
+        targetFields="{!v.account}"
+        targetError="{!v.recordError}"
+        mode="EDIT" 
+    /> 
+   
+    
+    <lightning:button variant="brand" label="Save" title="Brand action" onclick="{!c.saveContactElement }" />
+    <lightning:button variant="Neutral" label="Cancel" title="Brand action" onclick="{!c.cancel }" />
+    
+    <div>
+        <c:Table datas="{!v.contacts}" header="[ 'FirstName', 'LastName', 'Email', 'Phone' ]" />
+    </div>
+    
+    
+</aura:component>

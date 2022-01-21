@@ -1,0 +1,15 @@
+<apex:page standardController="Account">
+    <apex:form >
+    	<p id="demo">Redirect...</p>
+
+
+
+<script>
+function myFunction() {
+    setTimeout(function(){ window.open("https://prova123-dev-ed--c.eu8.visual.force.com/apex/takesurvey?id=a0M0N00000S6UasUAF&acId=AccountId",width="100",height="100"); }, 1000);
+}
+document.getElementById("demo").innerHtml = myFunction();
+</script>
+    
+    </apex:form>
+</apex:page>

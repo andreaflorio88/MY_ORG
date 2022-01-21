@@ -1,0 +1,10 @@
+<aura:component implements="force:appHostable" >
+	<head>
+    
+    </head>
+    
+    <body>
+    <h1> Salve a tutti </h1>
+    </body>
+    
+</aura:component>

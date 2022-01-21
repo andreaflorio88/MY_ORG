@@ -1,0 +1,24 @@
+<aura:component controller="Survey" implements="force:lightningQuickActionWithoutHeader,force:appHostable" >
+    <aura:attribute name="account" type="Account" /> 
+    <aura:attribute name="newSurvey" type="SurveyTest__c" default="{ 'sobjectType': 'SurveyTest__c' }" />
+    <aura:attribute name="options" type="List"/>
+    <aura:attribute name="accountId" type="String"/>
+    <aura:attribute name="startDate" type="Date" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <force:recordData aura:id="recordLoader"
+    targetFields="{!v.newSurvey}"
+    recordUpdated="{!c.RecordUpdated}"                  
+    />
+    
+    <lightning:card iconName="action:clone" title="Survey" >
+        <lightning:input label="SurveyName" value="{!v.newSurvey.Name}" required="true"/>
+        <lightning:input label="Come ti chiami" value="{!v.newSurvey.domanda__1}" required="true" placeholder="tuo nome"/>
+        <ui:inputDate label="Data di Nascita" value="{!v.newSurvey.domanda__5}" displayDatePicker="true"  /> 
+        <lightning:input label="Dove sei nato" value="{!v.newSurvey.domanda__2}" required="true" />
+        
+        
+        <br></br>
+        <lightning:button name ="saveButton" label="Save Contact" variant="brand" onclick="{!c.saveNewSurvey}" aura:id="saveButton"/>
+    </lightning:card> 
+</aura:component>

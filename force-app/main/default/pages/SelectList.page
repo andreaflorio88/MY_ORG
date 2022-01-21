@@ -1,0 +1,8 @@
+<apex:page controller="createAppointment">
+    <apex:form >
+    	<apex:selectList value="{!answer}" multiselect="false" size="1">
+            <apex:selectOptions value="{!optionList}" />
+        </apex:selectList>
+        <apex:commandButton value="Go" />
+    </apex:form>
+</apex:page>

@@ -1,0 +1,10 @@
+<aura:component >
+        <aura:attribute name="Nome" type="String"/>
+    
+	<ol>
+    	<li>Pane </li>
+        <li>Yogurt</li>
+        <li>Latte</li>
+        
+    </ol>
+</aura:component>

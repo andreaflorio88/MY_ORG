@@ -1,0 +1,6 @@
+<!--c:ButtonEvent-->
+<aura:event type="COMPONENT">
+    <!-- Add aura:attribute tags to define event shape.
+         One sample attribute here. -->
+    <aura:attribute name="message" type="String" default="test"/>
+</aura:event>

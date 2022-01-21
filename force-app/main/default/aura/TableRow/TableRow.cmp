@@ -1,0 +1,30 @@
+<aura:component implements="force:hasRecordId,flexipage:availableForRecordHome,force:appHostable">
+    <aura:attribute name="data" type="Map" />
+    <aura:attribute name="columsList" type="String[]" />
+    <aura:attribute name="dataColums" type="String[]" />
+    <aura:attribute name="myindex" type="Integer" />
+    <aura:attribute name="EditMode" type="boolean" default="false" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <aura:registerEvent name="dataChanged" type="c:DataTableChanged"/>
+    
+	<tr class="slds-hint-parent">
+        <td role="gridcell">
+        	<div class="slds-truncate" title="Index">{!v.myindex}</div>
+        </td>
+        <aura:iteration items="{!v.dataColums}" var="dataColumn">
+            <td ondblclick="{!c.edit}" role="gridcell">
+                <aura:if isTrue="{!v.EditMode == false}">
+                <div class="slds-truncate" title="Acme">{!dataColumn}</div>
+                    <aura:set attribute="else">
+                    <ui:inputText class="slds-input" aura:id="inputId" value="{!dataColumn}"/> 
+                    </aura:set>
+                </aura:if>
+            </td>
+        </aura:iteration>
+        	
+        <!-- <lightning:button onclick="{!c.setFirstName}" label="Cambia nome"/> -->
+        
+        
+    </tr> 
+</aura:component>

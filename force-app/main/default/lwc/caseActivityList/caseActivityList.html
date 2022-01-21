@@ -1,0 +1,71 @@
+<template>
+
+    <template if:true={activities.data}>
+
+        <lightning-card>
+            <div align="right" style="margin-right:1.5rem" onclick={handleShowDescription}><a>{linkLabel}</a></div>
+
+            <h3 slot="title">
+                <b><a style="color:black" data-objapiname="Account" onclick={goToActivityHistory}>{label.Activities}</a></b>
+                <lightning-icon icon-name="utility:refresh" class="refresh-icon" alternative-text="Refresh" size="xx-small" title="Refresh" onclick={refresh}></lightning-icon>
+            </h3>
+
+            <template for:each={activities.data} for:item="activity">
+                <div key={activity.Id} class="activity-container">
+
+                    <template if:true={activity.isTask}>
+                        <div>
+                            <lightning-icon icon-name="standard:task" size="small" alternative-text="Task" title="Task"></lightning-icon>
+                            <div class="activity-text-padding">
+                                <div style="float:left">
+                                    <a data-id={activity.Id} data-objapiname="Task" onclick={goToRecord}>{activity.subject}</a>
+                                </div>
+                                <div style="float:right">
+                                    {activity.dueDateString}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-task-container">
+                            <div class="text-padding">
+                                <a data-id={activity.Id} data-objapiname="User" onclick={goToRecord}>{activity.ownerName}</a>
+                                &nbsp;con&nbsp;
+                                <a data-id={activity.contactId} data-objapiname="Contact" onclick={goToRecord}>{activity.contactName}</a>
+                            </div>
+                            <template if:true={showDescription}>
+                                <div class="text-padding">{activity.description}</div>
+                            </template>
+                        </div>
+                    </template>
+
+                    <template if:true={activity.isEvent}>
+                        <div>
+                            <lightning-icon icon-name="standard:event" size="small" alternative-text="Event" title="Event"></lightning-icon>
+                            <div class="activity-text-padding">
+                                <div style="float:left">
+                                    <a data-id={activity.Id} data-objapiname="Event" onclick={goToRecord}>{activity.subject}</a>
+                                </div>
+                                <div style="float:right">
+                                    {activity.dueDateString}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-event-container">
+                            <div class="text-padding">
+                                <a data-id={activity.Id} data-objapiname="User" onclick={goToRecord}>{activity.ownerName}</a>
+                                &nbsp;con&nbsp;
+                                <a data-id={activity.contactId} data-objapiname="Contact" onclick={goToRecord}>{activity.contactName}</a>
+                            </div>
+                            <template if:true={showDescription}>
+                                <div class="text-padding">{activity.description}</div>
+                            </template>
+                        </div>
+                    </template>
+
+                </div>
+            </template>
+
+        </lightning-card>
+
+    </template>
+
+</template>

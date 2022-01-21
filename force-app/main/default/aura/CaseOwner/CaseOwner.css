@@ -1,0 +1,66 @@
+.THIS.ownerCard .slds-card__header{
+    margin-bottom: .5rem !important;
+}
+
+.THIS .iconContainer{
+    float: left; 
+    display: inline-block; 
+    margin-right: .75rem; 
+    margin-top: .25rem;
+}
+
+.THIS .titleCardContainer{
+    display: inline-block; 
+    width: 85%; 
+    padding-right: .5rem;
+}
+
+.THIS .ownerName{
+    display: inline-block; 
+    float: left; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    width: 75%; font-weight: bold;
+}
+
+.THIS .buttonContainer{
+    float: right; 
+    width: 25%; 
+    display: inline-block;
+}
+
+.THIS .innerButtonContainer{
+    display: inline-block; 
+    float:right;
+}
+
+.THIS .smallText{
+    font-size: .9rem;
+}
+
+.THIS .editIcon{
+    margin-left: .4rem;       
+    margin-bottom: .25rem;
+}
+
+.THIS .fieldContainer{
+    margin: 1rem;
+}
+
+.THIS .fieldContainer .slds-form-element__control :hover{
+    cursor: pointer;
+}
+
+.THIS .searchBox{   
+    margin-left: 1rem;
+    margin-right: 1rem;
+    margin-bottom: .25rem;
+}
+
+.THIS .possibleOwnerName{
+	margin-top: .5rem;
+}
+
+.THIS .slds-card__header-title{
+    display: contents;
+}

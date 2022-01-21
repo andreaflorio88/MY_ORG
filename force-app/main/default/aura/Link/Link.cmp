@@ -1,0 +1,13 @@
+<aura:component controller="ControllerLink" implements="force:appHostable,flexipage:availableForRecordHome,force:hasRecordId,force:LightningQuickActionWithoutHeader">
+    <aura:attribute name="recordId" type="Id" />
+    <aura:attribute name="error" type="Boolean" default="false" access="private"/>
+	<aura:attribute name="qualtrics" type="String" default="" /> 
+ 	
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>  
+	  
+    <div class="slds-notify__content slds-grid"> 
+        <textarea readonly="true" id="urlClassic" rows="3" cols="300">{!v.qualtrics}</textarea>
+    </div>
+    <br/>
+	<lightning:button class="slds-align_right slds-button slds-button_brand" iconName="utility:copy_to_clipboard" variant="border-filled" label="Copy to Clipboard" onclick="{! c.copyText }"/>
+</aura:component>

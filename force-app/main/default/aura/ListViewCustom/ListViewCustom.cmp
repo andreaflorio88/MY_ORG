@@ -1,0 +1,32 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction"
+                access="global"
+                controller="listViewController">
+ <!-- call doInit js function on component load to fetch list view details-->   
+    <aura:handler name="init" value="this" action="{!c.doInit}"/>
+ <!-- aura attributes -->   
+    <aura:attribute name="listViewResult" type="string[]"/>
+    <aura:attribute name="objectInfo" type="string" default="Account"/>
+    <aura:attribute name="currentListViewName" type="string" />
+    <aura:attribute name="bShowListView" type="boolean" default="false"/> 
+    
+  <!-- custom dropdown to display available list view options-->
+    <div class="slds-form-element">
+        <lightning:select name="select1" onchange="{!c.onPicklistChange}" label=" " class="customCls">
+            <aura:iteration items="{!v.listViewResult}" var="listView">
+                <option value="{!listView.developerName}">{!listView.label}</option>
+            </aura:iteration> 
+        </lightning:select> 
+    </div>
+   
+   <!-- lightning List View : https://sforce.co/2Q4sebt 
+    <aura:if isTrue="{!v.bShowListView}">
+        <lightning:listView objectApiName="{!v.objectInfo}"
+                            listName="{!v.currentListViewName}"
+                            rows="5"
+                            showSearchBar="true"
+                            showActionBar="false"
+                            enableInlineEdit="true"
+                            showRowLevelActions="false"
+                            />
+    </aura:if> -->
+</aura:component>

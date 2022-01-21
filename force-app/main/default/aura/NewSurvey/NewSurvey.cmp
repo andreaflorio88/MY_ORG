@@ -1,0 +1,19 @@
+<aura:component implements="force:lightningQuickActionWithoutHeader" >
+	<aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+<aura:html tag="style">
+    .slds-backdrop {
+    background: rgba(43, 40, 38, 0) !important;  
+    }
+    .slds-fade-in-open {
+    display:none !important;
+   }
+   <!-- qui si può inserire o .uiModal per rendere editabile lo schermo, 
+   oppure fare un porkaround nel controller inserendo un setTimeOut  -->
+   .uiModal{
+            	display: block;
+            	z-index: -1 !important;
+   }
+</aura:html>
+    <!-- button che verrà disabilitato nel controller js-->
+    <lightning:button name ="saveButton" label="Save Contact" variant="brand" onclick="{!c.saveContact}" aura:id="saveButton"/>
+</aura:component>

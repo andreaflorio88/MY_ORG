@@ -1,0 +1,29 @@
+<!--
+ - Created by cge01625 on 13/12/2019.
+ -->
+
+<!-- Rest Web Service -->
+<template>
+    <lightning-card variant="Narrow" title="REST Web Service" icon-name="standard:data_integration_hub">
+        <p class="slds-p-horizontal_small slds-float--right">
+            <img src="https://apps.odoo.com/apps/icon_image?module_id=19346" width="46px" height="60px"/>
+        </p><br/>
+        <p slot="footer" class="slds-p-horizontal_small">
+            <template for:each={restWebServices} for:item="ws">
+                <lightning-layout key={ws.Id} multiple-rows="true">
+                    <lightning-layout-item size="4">
+                        <lightning-input type="toggle" label={ws.Name} value={ws.Name} name="input1" checked={ws.isActive__c} onclick={manageWS} class={size}>
+                        </lightning-input>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="8">
+                        <template if:true={ws.isActive__c} > Data attivazione: </template>
+                        <template if:false={ws.isActive__c} > Data disattivazione: </template>
+                        <lightning-formatted-date-time value={ws.LastModifiedDate} year="numeric" month="numeric" day="numeric" hour="2-digit"
+                                                       minute="2-digit" time-zone="UTC" time-zone-name="short" hour12="false"></lightning-formatted-date-time>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </template>
+        </p>
+    </lightning-card>
+
+</template>

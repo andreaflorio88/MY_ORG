@@ -1,0 +1,54 @@
+<aura:component implements="force:lightningQuickActionWithoutHeader,force:appHostable,force:hasRecordId,force:appHostable,flexipage:availableForRecordHome">
+    <!--use boolean attribute for Store true/false value,
+    make default to "false" so modal box are not display on the load of component. 
+    --> 
+    <aura:attribute name="isOpen" type="boolean" default="false"/>
+    
+    <!--Use "slds-m-around_xx-large" class to add standard X-Large padding to the component--> 
+    <div class="slds-m-around_xx-large">
+        
+        <lightning:button variant="brand"
+                          label="About SFDCmonkey.com"
+                          title="About SFDCmonkey.com"
+                          onclick="{! c.openModel }" />
+        <!--Use aura:if tag to display Model Box, on the bese of conditions. [isOpen boolean attribute] -->   
+        <aura:if isTrue="{!v.isOpen}">    
+            <!--###### MODAL BOX Start######--> 
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <!-- ###### MODAL BOX HEADER Start ######-->
+                    <header class="slds-modal__header">
+                        <lightning:buttonIcon iconName="utility:close"
+                                              onclick="{! c.closeModel }"
+                                              alternativeText="close"
+                                              variant="bare-inverse"
+                                              class="slds-modal__close"/>
+                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">New Contact</h2>
+                    </header>
+                    <!--###### MODAL BOX BODY Part Start######-->
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                                 	
+                                <lightning:input label="First Name" value="{!v.newContact.FirstName}" required="true" aura:id="firstname" onchange="{!c.canEnabledButton}"/>
+                                <lightning:input label="Last Name" value="{!v.newContact.LastName}" required="true" aura:id="lastname" onchange="{!c.canEnabledButton}"/>
+                                <lightning:input label="Phone" value="{!v.newContact.Phone}"
+                                                 pattern="^(1?(-?\d{3})-?)?(\d{3})(-?\d{4})$" aura:id="phoneId" 
+                                                 messageWhenPatternMismatch="Number not valid" onchange="{!c.canEnabledButton}"/>
+                                <lightning:input aura:id="mphoneid" label="Mobile" value="{!v.newContact.MobilePhone}" 
+                                                 pattern="^(1?(-?\d{3})-?)?(\d{3})(-?\d{4})$"
+                                                 messageWhenPatternMismatch="Number not valid" onchange="{!c.canEnabledButton}"/>
+                                <br></br>
+                    </div>
+                        <footer class="slds-modal__footer">
+                                <lightning:button name ="cancel" label="Cancel" onclick="{!c.closeModel}" aura:id="cancel"/>
+                        		<lightning:button name ="saveButton" label="Save" variant="brand" onclick="{!c.saveContact}" aura:id="saveButton"/>
+                        </footer>
+                    
+                    <!--###### MODAL BOX FOOTER Part Start ######-->
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+            <!--###### MODAL BOX Part END Here ######-->
+            
+        </aura:if>
+    </div>
+</aura:component>

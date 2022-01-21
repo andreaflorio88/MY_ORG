@@ -1,0 +1,104 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" controller="CaseOwnerClass" access="global" >
+    <lightning:notificationsLibrary aura:id="notifLib"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="ownerName" type="String" />    
+    <aura:attribute name="showSpinner" type="Boolean" />
+    <aura:attribute name="showEditField" type="Boolean" />
+    <aura:attribute name="possibleOwners" type="OwnerWrapper[]" />
+    <aura:attribute name="possibleOwnersTemp" type="OwnerWrapper[]" />    
+    
+    <lightning:card aura:id="card" class="ownerCard">
+        <aura:set attribute="title">            
+            <div>                
+                <div class="iconContainer">
+                    <lightning:icon iconName="standard:assigned_resource" size="medium"/>
+                </div>
+                
+                <div class="titleCardContainer">                    
+                    <div style="font-size: .75rem;">{!$Label.c.CaseOwner}</div>                     
+                    <div>
+                        <div class="ownerName"><span title="{!v.ownerName}">{!v.ownerName}</span></div>                        
+                        <div class="buttonContainer">
+                            <div class="innerButtonContainer">
+                                <aura:if isTrue="{!!v.showEditField}">
+                                    <lightning:buttonIcon class="editIcon" 
+                                                          iconName="utility:edit" 
+                                                          variant="bare" 
+                                                          onclick="{!c.openChangeOwner}" 
+                                                          alternativeText="{!$Label.c.Edit}"/>                                
+                                </aura:if>
+                                <aura:if isTrue="{!v.showEditField}">
+                                    <lightning:buttonIcon class="editIcon" 
+                                                          iconName="utility:undo" 
+                                                          variant="bare" 
+                                                          onclick="{!c.closeChangeOwner}" 
+                                                          alternativeText="{!$Label.c.Cancel}"/>
+                                </aura:if>
+                                <lightning:buttonIcon class="editIcon" 
+                                                      iconName="utility:resource_territory" 
+                                                      variant="bare" 
+                                                      onclick="{!c.autoAssign}" 
+                                                      alternativeText="{!$Label.c.AutoAssign}"/>
+                            </div>
+                        </div>
+                    </div>                    
+                </div>                
+            </div>
+        </aura:set>
+        <aura:if isTrue="{!v.showEditField}">           
+            <div class="searchBox">
+                <div class="slds-form-element">                    
+                    <div class="slds-form-element__control">
+                        <div class="slds-combobox_container">
+                            <div aura:id="dropDownElement" class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click" aria-expanded="true" aria-haspopup="listbox" role="combobox">
+                                
+                                <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right" role="none">
+                                    
+                                    <input aura:id="ownerInput" class="slds-input slds-combobox__input slds-has-focus" aria-autocomplete="list" 
+                                           aria-controls="listbox-id-2" autocomplete="off" role="textbox" type="text" placeholder="{!$Label.c.Search + '...'}" 
+                                           onkeydown="{!c.handleKeyDown}" onblur="{!c.closeChangeOwner}"/>
+                                    
+                                    <div class="slds-icon_container slds-icon-utility-search slds-input__icon slds-input__icon_right">
+                                        <lightning:icon iconName="utility:search" size="x-small"/>
+                                    </div>
+                                </div>
+                                
+                                <div class="slds-dropdown slds-dropdown_length-with-icon-7 slds-dropdown_fluid" role="listbox">
+                                    <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                                        
+                                        <aura:iteration items="{!v.possibleOwnersTemp}" var="possibleOwner" indexVar="i">
+                                            <li role="presentation" class="slds-listbox__item">
+                                                <div id="{!i}" class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta" 
+                                                     role="option" onmousedown="{!c.handleOptionClick}">
+                                                    <span class="slds-media__figure slds-listbox__option-icon">
+                                                        <aura:if isTrue="{!!possibleOwner.isQueue}">
+                                                            <span class="slds-icon_container">
+                                                                <lightning:icon iconName="standard:user" size="small"/>
+                                                            </span>
+                                                        </aura:if>
+                                                        <aura:if isTrue="{!possibleOwner.isQueue}">
+                                                            <span class="slds-icon_container">
+                                                                <lightning:icon iconName="standard:orders" size="small"/>
+                                                            </span>
+                                                        </aura:if>
+                                                    </span>
+                                                    <span class="slds-media__body possibleOwnerName">
+                                                        <span class="slds-listbox__option-text slds-listbox__option-text_entity">{!possibleOwner.ownerName}</span>                                                    
+                                                    </span>
+                                                </div>
+                                            </li>
+                                        </aura:iteration>                                        
+                                        
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aura:if>       
+        <aura:if isTrue="{!v.showSpinner}">
+            <lightning:spinner aura:id="spinner" size="small"/>
+        </aura:if>
+    </lightning:card>    
+</aura:component>

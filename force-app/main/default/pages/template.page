@@ -1,0 +1,22 @@
+<apex:page >
+
+    <apex:outputPanel layout="none">
+        <apex:insert name="Header"/>
+        <apex:pageMessages />
+    </apex:outputPanel>
+    
+    <apex:stylesheet value="{!$Resource.CustomStyles}"/>
+    
+    <apex:panelGrid Columns="3">
+        <apex:outputPanel >
+            <apex:insert name="LeftNav"/>
+        </apex:outputPanel>
+        <apex:outputPanel >
+            <apex:insert name="Main"/>
+        </apex:outputPanel>
+        <apex:outputPanel >
+            <apex:insert name="Social"/>
+        </apex:outputPanel>
+    </apex:panelGrid>
+    
+</apex:page>

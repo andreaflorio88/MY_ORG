@@ -1,0 +1,25 @@
+<aura:component>
+	<aura:attribute name="alert" type="Boolean" default="false"/>
+    <aura:attribute name="errorlist" type="String[]" default="[]"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.init}"/>
+    <aura:iteration items="{!v.errorlist}" var="element"></aura:iteration>
+    
+    
+    <aura:if isTrue="{!v.alert}">
+<div id="alert" class="slds-notify_container">
+  <div class="slds-notify slds-notify--toast slds-theme--error" role="alert">   
+    <span class="slds-assistive-text">Error</span>
+    <div class="slds-notify__content slds-grid"> 
+      <div class="slds-col slds-align-middle">
+        <h2 class="slds-text-heading--small">Insert a number!</h2>
+          <button class="slds-button slds-button_icon slds-notify__close slds-button_icon-inverse" onclick="{!c.close}" title="Close">
+              <lightning:icon class="icn" iconName="utility:close" size="small" variant="inverse"/>
+    		 	<span class="slds-assistive-text">Close</span>
+  		  </button>
+      </div>
+    </div>
+  </div>
+</div>
+</aura:if>
+</aura:component>

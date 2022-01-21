@@ -1,0 +1,67 @@
+<apex:page showHeader="false" controller="createAppointment" standardStylesheets="false">
+    <style>
+        .cent
+        {
+        text-align:center;
+        width: 300px;
+        border: 5px solid white;
+        padding: 50px;
+        margin: 20px;
+        }
+        body {background-color: orange;}
+        
+    </style>
+    
+    <body class="cent">
+        <apex:image id="theImage" value="https://www.edison.it/themes/edisoncorporate/images/logos/edison.svg" width="220" height="55" alt="Description of image here"/>
+        
+        <apex:outputPanel id="thePanel" rendered="{!contextStatus == '1'}">
+            <apex:form >
+                <div>
+                    fascia oraria
+                    <br/> 
+                    <apex:selectList value="{!answer}" multiselect="false" size="1">
+                        <apex:selectOptions value="{!optionList}" />
+                    </apex:selectList>
+                    <br/><br/>
+                    inserisci numero di telefono
+                    <br/>
+                    <apex:inputText id="phoneContact" value="{!phone}" required="true" onkeyup="enableButton()"> 
+                    </apex:inputText>
+                    <br/><br/>
+                    <apex:commandButton id="btnchange" styleClass="submit-button" value="Prendi appuntamento" action="{! doAction}" title="Cliccami" />
+                </div>
+            </apex:form>
+        </apex:outputPanel>
+        <apex:outputPanel id="thePanel_KO" rendered="{!contextStatus == '10'}">
+            <span>Spiacenti Cliente non trovato!</span>
+        </apex:outputPanel>
+        <apex:outputPanel id="thePanel_OK" rendered="{!contextStatus == '20'}">
+            <span>	Ciao, abbiamo preso in carico la tua richiesta
+                verrai contattato da un nostro referente commerciale appena possibile. 
+            </span>
+        </apex:outputPanel>
+        <apex:outputPanel id="thePanel_KO2" rendered="{!contextStatus == '30'}">
+            <span>Errore Generico!</span>
+        </apex:outputPanel>
+    </body>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript" src="//mc.s10.exacttarget.com/cloudpages/utilities/t.js"></script>
+    <script type="text/javascript">var ctx=new Fuel.TrackingContext(100015657,100014861);var t=new Fuel.Tracking(ctx,{siteid:'138277',pageid:'392',isMobile:'false'});t.wrapLinks(null,'CLOUDPAGESCLICK');t.addRawEvent('CLOUDPAGESVISIT',{pageid:'392'});t.send();</script>
+    <script type="text/javascript">window.contentDetail={"isSite":true,"mid":100015657,"eid":100014861,"pageID":392,"siteID":138277,"isMobile":false};</script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('.submit-button').prop('disabled', true);
+    });
+    
+    function enableButton() {
+        var phone = document.getElementById("phoneContact").value;
+        if(phone.lenght>=10){
+            alert ("ciao");
+            document.getElementById(btnchange).removeAttribute('disabled');
+        } else {
+            document.getElementById(btnchange).setAttribute('disabled','disabled');    
+        }
+    }   
+    </script>
+</apex:page>

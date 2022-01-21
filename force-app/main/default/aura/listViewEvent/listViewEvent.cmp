@@ -1,0 +1,30 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+	
+        
+    <lightning:listView aura:id="listViewAccounts"
+    objectApiName="Account"
+    listName="AllAccounts"
+    rows="5"
+    showSearchBar="true"
+    showActionBar="false"
+    enableInlineEdit="true"
+    showRowLevelActions="false"/>
+    
+    
+    <aura:html tag="style">
+    .slds-backdrop {
+    background: rgba(43, 40, 38, 0) !important;  
+    }
+    .slds-fade-in-open {
+    display:none !important;
+   }
+   <!-- qui si può inserire o .uiModal per rendere editabile lo schermo, 
+   oppure fare un porkaround nel controller inserendo un setTimeOut  -->
+   .uiModal{
+            	display: block;
+            	z-index: -1 !important;
+   }
+</aura:html>
+    
+    
+</aura:component>

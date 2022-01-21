@@ -1,0 +1,31 @@
+<aura:component controller="LightningInlineEditCltr" implements="flexipage:availableForAllPageTypes,force:hasRecordId,force:appHostable">  
+    <!--Init handler To Get the records on load--> 
+    <aura:handler name="init" value="{!this}"   action="{!c.getAccountsJS}"/>
+    <aura:attribute name="AccountList" type="account[]" description="store account records list"/>
+    <aura:attribute name="showSaveCancelBtn" type="boolean" description="show hide save and cancel" default="false"/>
+   
+    <div class="slds-m-around_large">
+        <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+            <thead>
+                <tr class="slds-text-title--caps">
+                    <th scope="col"><div class="slds-truncate" title="Id">S.No</div></th>
+                    <th scope="col"><div class="slds-truncate" title="Account Name">Account Name</div></th>
+                    <th scope="col"><div class="slds-truncate" title="Rating">Rating</div></th>
+                </tr>
+            </thead>
+            <tbody>
+                <aura:iteration items="{!v.AccountList}" var="acc" indexVar="index">
+                    <!-- Child Component -->
+                    <c:ChildInlineEdit singleAccount="{!acc}"
+                                     showSaveCancelBtn="{!v.showSaveCancelBtn}"
+                                     index="{!index + 1}" />
+                </aura:iteration>
+            </tbody>
+        </table>
+        <aura:if isTrue="{!v.showSaveCancelBtn}">
+            <lightning:buttonGroup class="slds-m-around_medium">
+                <lightning:button label="Save" onclick="{!c.SaveAccount}" />
+            </lightning:buttonGroup>
+        </aura:if>
+    </div>
+</aura:component>

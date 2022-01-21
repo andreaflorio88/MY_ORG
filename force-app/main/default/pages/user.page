@@ -1,0 +1,37 @@
+<apex:page >
+<script>
+function getUserInfo()  
+  {     
+  var userInfoById = {}; 
+  var result = sforce.connection.query("Select Id, UserId, IsFrozen, IsPasswordLocked From UserLogin order by UserId");      
+  var it = new sforce.QueryResultIterator(result);  
+  while(it.hasNext())       {     
+  var record = it.next();    
+  userInfoById[record.UserId] = record;   
+  }                 
+  var output='<table><tr><th>User</th><th>Action</th></tr>';       
+  result = sforce.connection.query("Select Id, FirstName, LastName from User where IsActive=true");       
+  it = new sforce.QueryResultIterator(result);   
+  while(it.hasNext())   
+  {      
+  var record = it.next();       
+  if (record.Id in userInfoById)   
+  {     
+  var userInfo=userInfoById[record.Id];    
+  var name=record.FirstName + ' ' + record.LastName;      
+  output+='<tr><td>' + name + '</td><td>';        
+  if (userInfo.IsFrozen=='true')        
+  {       
+  output+="<button onclick=\"freeze('" + userInfo.Id + "', '" + name + "', false);\">Defrost</button>";    
+  }    
+  else      
+  {         
+  output+="<button onclick=\"freeze('" + userInfo.Id + "', '" + name + "', true);\">Freeze</button>";       
+  }           output+='</td></tr>';    
+  }   
+  }       
+  output+='</table>'; 
+  document.getElementById('output').innerHTML=output;   
+  }
+</script>
+</apex:page>

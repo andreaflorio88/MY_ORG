@@ -1,0 +1,351 @@
+<template>
+    <template if:true={showComponent}>
+
+        <template if:true={isLoading}>
+            <lightning-spinner alternative-text="Loading..."></lightning-spinner>
+        </template>
+
+        <!--CARD INIZIALE CHIUSA IN HOMEPAGE-->
+        <article class="slds-card outer-card">
+            <div class="slds-card__header slds-grid">
+              <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                <div class="slds-media__figure">
+                  <span class="slds-icon_container slds-icon-standard-account" title="account">
+                    <lightning-icon icon-name="standard:metrics" size="medium" alternative-text="Previsioni" title="Previsioni"></lightning-icon>
+                    <span class="slds-assistive-text">Previsioni Consumi</span>
+                  </span>
+                </div>
+                <div class="slds-media__body">
+                    <p>Previsioni Consumi</p>
+                  <h2 class="slds-card__header-title">
+                    <a href="javascript:void(0);" class="slds-card__header-link slds-truncate" title="Previsioni">
+                      <span>Previsioni Consumi</span>
+                    </a>
+                  </h2>
+                </div>
+                <div class="slds-no-flex">
+                  <button class="slds-button slds-button_neutral" onclick={toggleQuotas}>{toggleLabel}</button>
+                </div>
+              </header>
+            </div>
+        </article>
+    </template>
+
+    <!--CARD DI DETTAGLIO CON TABELLA DATI-->
+    <template if:true={showQuotas}>
+        <lightning-card>
+
+            <!--BOTTONE PER L'IMPOSTAZIONE DEGLI OBIETTIVI-->
+            <template if:false={isPersonalForecast}>
+                <div class="edit-button-container">
+                    <lightning-button-icon icon-name="utility:edit"
+                                            alternative-text="Edit"
+                                            onclick={toggleEditMode}
+                                            class="slds-m-left_x-small"
+                                            title="Modifica">
+                    </lightning-button-icon>
+                </div>
+            </template>
+
+            <div class="edit-button-container">
+                <lightning-button-icon icon-name="utility:loop"
+                                        alternative-text="Refresh"
+                                        onclick={refreshData}
+                                        class="slds-m-left_x-small"
+                                        title="Refresh">
+                </lightning-button-icon>
+            </div>
+
+            <!--BOTTONE PER LA TORNARE ALLA HOME PAGE-->
+            <template if:true={isNavigationMode}>
+                <div class="edit-button-container">
+                    <lightning-button-icon icon-name="utility:back"
+                                            alternative-text="Back"
+                                            onclick={backToHomePage}
+                                            class="slds-m-left_x-small"
+                                            title="Indietro">
+                    </lightning-button-icon>
+                </div>
+            </template>
+
+            <!--TABELLA-->
+            <div class="table-container">
+
+                <!--FILTRI PER PERIODO-->
+                
+                <b class="combo-label">Periodo:</b>
+                <select class="period-combo" onchange={handleMonthChange}>
+                    <template for:each={dateOptions} for:item="option">
+                        <template if:true={option.isSelected}>
+                            <option key={option.id} value={option.id} selected>{option.name}</option>
+                        </template>
+                        <template if:false={option.isSelected}>
+                            <option key={option.id} value={option.id}>{option.name}</option>
+                        </template>
+                    </template>
+                </select>
+                
+                <lightning-layout horizontal-align="center">
+                    <lightning-input type="toggle" label="1Q" name="input1Q" onchange={viewPrevisioni} checked={Q1}></lightning-input> &nbsp;&nbsp;&nbsp;&nbsp;
+                    <lightning-input type="toggle" label="2Q" name="input2Q" onchange={viewPrevisioni} checked={Q2}></lightning-input> &nbsp;&nbsp;&nbsp;&nbsp;
+                    <lightning-input type="toggle" label="3Q" name="input3Q" onchange={viewPrevisioni} checked={Q3}></lightning-input> &nbsp;&nbsp;&nbsp;&nbsp;
+                    <lightning-input type="toggle" label="4Q" name="input4Q" onchange={viewPrevisioni} checked={Q4}></lightning-input> &nbsp;&nbsp;&nbsp;&nbsp;
+                </lightning-layout>
+
+
+                <br/><br/>
+
+                <!--TABELLA DATI-->
+                <template for:each={data} for:item="row">
+                    <lightning-layout key={row.u.Id} horizontal-align="spread">
+
+                        <!--NOME AGENTE-->
+                        <lightning-layout-item size="1.5">
+                            <template if:false={row.f.isLastRow}>
+                                <template if:true={row.isHeaderRow}>
+                                    <p></p><b>Agente<lightning-helptext content="Account di riferimento"></lightning-helptext></b></p><br/></template>
+
+                                <div>
+                                    <!--div class="fl">
+                                        <img class="avatar-img" src={row.u.SmallPhotoUrl} />
+                                    </div-->
+                                    <template if:true={viewOpp}>
+                                        <a href="#" onclick={getOpp}><div data-uid={row.u.Id} class="fl row-text-top">{row.u.Name}</div></a>
+                                        <div class="fl row-text-top-ico">
+                                            <template if:true={row.hasViewRecord}>
+                                                    <lightning-button-icon icon-name="utility:down" data-uid={row.u.Id}
+                                                        alternative-text="View Team"
+                                                        onclick={viewRecordAM}
+                                                        size="small"
+                                                        variant="bare">
+                                                    </lightning-button-icon>
+                                            </template>
+                                        </div>
+                                    </template>
+                                    <template if:false={viewOpp}>
+                                        <div class="fl row-text-top">{row.u.Name}</div>
+                                        <div class="fl row-text-top-ico">
+                                            <template if:true={row.hasViewRecord}>
+                                                    <lightning-button-icon icon-name="utility:down" data-uid={row.u.Id}
+                                                        alternative-text="View Record AM"
+                                                        onclick={viewRecordAM}
+                                                        variant="bare"
+                                                        size="small">
+                                                    </lightning-button-icon>
+                                            </template>
+                                        </div>
+                                    </template>
+                                </div>
+                            </template>
+                            <template if:true={row.isTeamTotalRow}>
+                                <div>
+                                    <div class="fl row-text-top" style="margin-bottom: 1rem;">
+                                        <p><b>Totale Team</b></p>
+                                    </div>
+                                </div>
+                            </template>
+                            <template if:true={row.isTotalRow}>
+                                <div>
+                                    <div class="fl row-text-top">
+                                        <p><b>Totale</b></p>
+                                    </div>
+                                </div>
+                            </template>
+                        </lightning-layout-item>
+
+                        <!--CANONI E SERVIZI AP-->
+                        <lightning-layout-item size="1">
+                            <template if:true={row.isHeaderRow}>
+                                <p class="header-row-text"><b>AP<lightning-helptext content="Importo derivante da NCA dei consumi relativi all'anno precedente"></lightning-helptext></b></p><br/></template>
+
+                            <div class="row-text">
+                                {row.f.canonieServiziAP} €
+                            </div>  
+                        </lightning-layout-item>
+
+                        <!--CANONI E SERVIZI-->
+                        <lightning-layout-item size="1">
+                            <template if:true={row.isHeaderRow}>
+                                <p class="header-row-text"><b>Extra AC<lightning-helptext content="Consumi extra-lineari relativi al periodo selezionato"></lightning-helptext></b></p><br/></template>
+
+                            <div class="row-text">
+                                {row.f.canonieServizi} €
+                            </div>
+                        </lightning-layout-item>
+
+                        <!--LINEARE -->
+                        <lightning-layout-item size="1">
+                            <template if:true={row.isHeaderRow}>
+                                <p class="header-row-text"><b>Lineare alla data<lightning-helptext content="Consumi lineari relativi al periodo selezionato"></lightning-helptext></b></p><br/></template>
+
+                            <div class="row-text">
+                                {row.f.lineare} €
+                            </div>
+                        </lightning-layout-item>
+
+                        <!--STIMA NORMAL USAGE-->
+                        <lightning-layout-item size="1">
+                            <template if:true={row.isHeaderRow}>
+                                <p class="header-row-text"><b>Proiezione Lineare<lightning-helptext content="Consumi relativi al Normal Usage dal giorno corrente a quello in corso fino alla fine del mese"></lightning-helptext></b></p><br/></template>
+
+                            <div class="row-text">
+                                {row.f.normalUsage} €
+                            </div>
+                        </lightning-layout-item>
+
+
+                        <!--RETTIFICA NORMAL USAGE-->
+                        <lightning-layout-item size="1">
+                            <template if:true={row.isHeaderRow}>
+                                <p class="header-row-text"><b>Ret. Usage<lightning-helptext content="Consumo rettificato della colonna Stima Usage derivante da NCA (questo valore se inserito andrà a sostituire il valore presente nella colonna Stima Usage per quanto riguarda le somme per il calcolo del Forecast)"></lightning-helptext></b></p><br/></template>
+
+                            <div class="row-text">
+                                <template if:true={row.isEditableRow}>
+                                    <template if:true={editRetMode}>
+                                        <lightning-input variant="label-hidden" type="number" data-fid={row.f.forecastId} data-uid={row.u.Id}
+                                        data-usage={row.f.retQuotaUsage} data-key={row.key} name={row.f.rtf} value={row.f.retQuotaUsage} onchange={handleRowChange}>
+                                        </lightning-input>
+                                    </template>
+                                    <template if:false={editRetMode}>
+                                        {row.f.retQuotaUsage} €
+                                    </template>
+                                </template>
+                                <template if:false={row.isEditableRow}>
+                                    {row.f.retQuotaUsage} €
+                                </template>
+                            </div>
+                        </lightning-layout-item>
+
+                        <!--PIPELINE-->
+                        <lightning-layout-item size="1">
+                            <template if:true={row.isHeaderRow}>
+                                <p class="header-row-text"><b>Pipeline<lightning-helptext content="Somma dei consumi relativi alle opportunità che hanno Soluzioni nel mese/anno in corso di valutazione con probabilità >= 75%"></lightning-helptext></b></p><br/></template>
+
+                            <div class="row-text">
+                                {row.f.pipeline} €
+                            </div>
+                        </lightning-layout-item>
+
+                        <!--TOTALI-->
+                        <lightning-layout-item size="1">
+                            <template if:true={row.isHeaderRow}>
+                                <p class="header-row-text"><b>Forecast<lightning-helptext content="Somma di Extra AC, Lineare AC, Stima Usage (Rettifica Usage se inserito) e Pipeline"></lightning-helptext></b></p><br/></template>
+                            <div class="row-text">
+                                {row.f.forecast} €
+                            </div>
+                        </lightning-layout-item>
+
+                        <!--OBIETTIVI-->
+                        <lightning-layout-item size="1">
+                            <template if:true={row.isHeaderRow}>
+                                <p class="header-row-text"><b>Target<lightning-helptext content="Target annuale assegnato dal manager"></lightning-helptext></b></p><br/></template>
+
+                            <div class="row-text">
+                                <template if:true={row.isEditableRow}>
+                                    <template if:true={editTarMode}>
+                                        <lightning-input variant="label-hidden" type="number" data-fid={row.f.forecastId} data-uid={row.u.Id}
+                                        data-usage={row.f.retQuotaUsage} data-key={row.key} name={row.f.id} value={row.f.quotaAmount} onchange={handleRowChange}>
+                                        </lightning-input>
+                                    </template>
+                                    <template if:false={editTarMode}>
+                                        {row.f.quotaAmount} €
+                                    </template>
+                                </template>
+                                <template if:false={row.isEditableRow}>
+                                    {row.f.quotaAmount} €
+                                </template>
+                            </div>
+                        </lightning-layout-item>
+
+                    </lightning-layout>
+                </template>
+            </div>
+
+            <br/>
+
+            <!--BOTTONE PER IL SALVATAGGIO OBIETTIVI-->
+            <template if:true={editMode}>
+                <div align="center">
+                    <lightning-button
+                        variant="brand"
+                        label="Salva"
+                        title="Salva"
+                        onclick={saveGoals}
+                        icon-name="utility:save"
+                        class="slds-m-left_small">
+                    </lightning-button>
+                </div>
+            </template>
+
+        </lightning-card>
+    </template>
+
+
+    <!--MODALE PER LA VISUALIZZAZIONE DELLE OPPORTUNITA' E DEI CONSUMI-->
+    <template if:true={showModal}>
+
+        <div>
+            <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_large" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1">
+
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header slds-modal__header_empty">
+                        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title={label.Close} onclick={closeOpportunityTable}>
+                                <lightning-icon icon-name="utility:close" alternative-text={label.Close} variant="inverse"></lightning-icon>
+                        <span class="slds-assistive-text">{label.Close}</span>
+                        </button>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    
+                    <!-- SPINNER -->
+                    <template if:true={isLoadingModal}> 
+                        <div style="position:relative; top: 50%">
+                            <lightning-spinner alternative-text="Loading..."></lightning-spinner>
+                        </div>
+                    </template>
+
+					<!--VISUALIZZAZIONE DELLA TABELLA DELLE OPPORTUNITA'-->
+						<template if:true={showError}>
+							<p class="header-error-text"><b>Non sono presenti opportunità per l'utente selezionato</b></p><br/>
+						</template>
+						
+						<template if:true={showTable}>
+
+                            <!-- VALORI DI STAGE -->
+                            <div align="left">  
+                                <a href="#" onclick={showStageValues}>Valori di Stage ammessi</a><br/>
+                                <template if:true={showDetails}>
+                                    <template for:each={options} for:item="option">
+                                        <div key={option.id}>
+                                            <lightning-formatted-text value={option.value}></lightning-formatted-text><br/>
+                                        </div>
+                                    </template>
+                                </template>
+                            </div>
+                            <br/>
+                            
+							<div>
+								<lightning-datatable
+									key-field="Id"
+									data={oppData}
+                                    columns={oppColumns}
+                                    onsave={handleSave}
+									hide-checkbox-column="true"
+									show-row-number-column="false"
+                                    onrowaction={handleRowAction}>
+								</lightning-datatable>
+                            </div>
+
+                        </template>                 
+
+                    </div>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </div>
+    </template>
+
+    <template if:true={showConsumiTable}>
+        <c-opportunity-consumi-list-top-client opportunity={opportunityId} onclosetable={closeConsumiTable}></c-opportunity-consumi-list-top-client>
+    </template>
+
+</template>

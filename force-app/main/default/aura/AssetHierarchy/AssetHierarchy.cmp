@@ -1,0 +1,14 @@
+<aura:component controller="LightningTreeApexController" implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    
+    <aura:attribute name="recordId" type="Id" />
+    <aura:attribute name="asset" type="Asset"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:attribute name="items" type="Object"/>
+    
+    <lightning:helptext content="Ask to Andrea"/> 
+    <lightning:card title="Asset Hierarchy" iconName="standard:asset_relationship">
+    <!-- header="Asset Hierarchy" !-->
+    <lightning:tree items="{! v.items }"  onselect="{!c.handleSelect}"/>
+    </lightning:card>
+    
+</aura:component>

@@ -1,0 +1,33 @@
+<aura:component controller="ContactTable" implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+	<!-- <aura:import library="lightningComponentDemo:mockdataFaker" property="mockdataLibrary"/> -->
+    
+    <aura:attribute name="contacts" type="Contact[]"/>
+    <aura:attribute name="columns" type="List"/>
+    <aura:attribute name="recordId" type="String"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.init}"/>
+    <aura:handler event="force:refreshView" action="{!c.init}"/> 
+    
+    
+    
+    <force:recordData aura:id="record"
+                      layoutType="FULL"
+                      recordId="{!v.recordId}"
+                      fields="{!v.contacts}"
+                      recordUpdated="{!c.recordUpdated}" 
+                      mode="EDIT"
+									/>
+    
+                <div>
+        <lightning:datatable aura:id ="contactDataTable"
+                             keyField="id" 
+                             data="{!v.contacts}" 
+                             columns="{!v.columns}" 
+                             hideCheckboxColumn="true" 
+                             showRowNumberColumn="true"
+                             onsave="{!c.saveTable}"/>
+    			</div>
+            
+        
+    
+</aura:component>

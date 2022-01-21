@@ -1,0 +1,39 @@
+<!-- searchAccount -->
+<template>
+    <lightning-card  variant="Narrow"  title="Ricerca Account" icon-name="standard:account">
+        <lightning-layout horizontal-align="center" vertical-align="end" multiple-rows="yes">
+            <lightning-layout-item size="3"></lightning-layout-item>
+            <lightning-layout-item size="6">
+
+                    <p if:true={accountId} class="slds-align--absolute-center">
+                        Account in ricerca: {accountId}
+                    </p>
+                    <br />
+                    <div onkeyup={handleKeyUp}>
+                        <lightning-input
+                                name="enter-search"
+                                label="Premi 'Invio' dopo aver inserito l'id per iniziare la ricerca"
+                                type="search"
+                        ></lightning-input>
+                    </div>
+                    <br />
+
+            </lightning-layout-item>
+            <lightning-layout-item size="3"></lightning-layout-item>
+            <lightning-layout-item size="1"></lightning-layout-item>
+            <lightning-layout-item size="10">
+                <template if:true={data}>
+                    <lightning-datatable
+                            key-field="id"
+                            data={data}
+                            show-row-number-column
+                            row-number-offset={rowOffset}
+                            hide-checkbox-column
+                            columns={columns}
+                            onrowaction={handleRowAction}>
+                    </lightning-datatable>
+                </template>
+            </lightning-layout-item>
+        </lightning-layout>
+    </lightning-card>
+</template>

@@ -1,0 +1,46 @@
+<apex:page standardController="Preventivo__c" recordSetVar="preventivitem">
+
+<!-- Componente Grafica -->
+  <h1>Congratulations {!$User.FirstName}!</h1> This is your new Page
+  <div><IMG src="https://image.freepik.com/icone-gratis/fuochi-d-39-artificio_318-118951.jpg"></img></div>
+
+<!-- Variabili -->
+  <apex:variable var="X" value="{!Preventivo__c}"/>
+
+<!-- Inizio Form -->
+<apex:form >
+
+<!-- Primo Blocco -->
+<apex:pageBlock id="Blocco_1" title="Dettaglio Preventivo" tabStyle="Citta__c" mode="inLineEdit">
+
+<!-- Prima Sezione -->
+<apex:pageBlocksection title="Dettaglio Section Preventivo" showHeader="True" collapsible="True">
+
+<!-- Prima Tabella-->
+<apex:pageBlockTable value="{!preventivitem}" var="pitem">
+            <apex:column headerValue="Id">
+                  <apex:outputText value="{!pitem.Id}"/>
+            </apex:column>
+            <apex:column headerValue="Preventivo">
+                  <apex:outputText value="{!pitem.Name}"/>
+            </apex:column>
+</apex:pageBlockTable>
+
+</apex:pageBlocksection>
+
+<!-- Seconda Sezione -->
+<apex:pageBlocksection title="Dettaglio Section Preventivo 2">
+
+<apex:inputField value="{!X.name}"/> 
+<apex:inputField value="{!X.OwnerId}"/>
+<apex:inputField value="{!X.Cliente__c}"/>
+<apex:commandButton action="{!save}" value="Update"/>
+
+</apex:pageBlocksection>
+
+</apex:pageBlock>
+</apex:form>
+<!-- Fine Form -->
+
+
+</apex:page>

@@ -1,0 +1,8 @@
+<!-- CustomButton.cmp -->
+<aura:component > 
+
+   <aura:registerEvent name="cmpEvent" type="c:ButtonEvent"/> 
+	
+   <ui:button label="fireComponent" press="{!c.fireComponentEvent}" /> 
+
+</aura:component>

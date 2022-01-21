@@ -1,0 +1,29 @@
+<apex:page standardController="Contact" extensions="WhatsAppController" tabStyle="Contact">
+
+  <style>
+      .startStyle{
+        position: absolute;
+        top: 50%;
+        padding: 20px;
+        left: 50%;
+        background: #51a284;
+        border-radius: 5px;
+        color: white;
+      }
+  </style>
+  <apex:form >
+      <apex:actionStatus id="wait" startText="Sending Message. Please Wait..." startStyleClass="startStyle">
+      </apex:actionStatus>
+
+      <apex:sectionHeader title="Send WhatsApp Message"/>
+      <apex:pageBlock title="Write your message below" id="msgBlock">
+          <apex:pageBlockSection columns="1">
+              <apex:inputTextarea rows="10" cols="50" label="Message" value="{!message}"/>
+              <apex:outputText rendered="{!showStatus}"><span style="color:#51a284">{!statusMessage}</span> </apex:outputText>
+          </apex:pageBlockSection>
+          <apex:pageBlockButtons >
+              <apex:commandButton action="{!sendMessage}" value="Send" status="wait" rerender="msgBlock"/>
+          </apex:pageBlockButtons>
+      </apex:pageBlock>
+  </apex:form>
+</apex:page>

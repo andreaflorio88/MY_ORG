@@ -1,0 +1,20 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" controller="CaseHTMLMailClass" access="global" >
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="htmlBody" type="String"/>
+    <aura:attribute name="showDescription" type="Boolean"/>
+    <aura:attribute name="Description" type="String"/>
+    <aura:attribute name="Subject" type="String"/>
+    
+    <div class="titleHTML">ORIGINAL REQUEST</div>
+    <div class="subject">Subject&nbsp;{!v.Subject}</div>
+    <aura:if isTrue="{!!v.showDescription}">
+        <div class="container">            
+            <lightning:formattedRichText value="{!v.htmlBody}"/>
+        </div>
+        <aura:set attribute="else">
+            <div class="containerDescription">
+                <lightning:formattedText value="{!v.Description}" />                                            
+            </div>
+        </aura:set>
+    </aura:if>
+</aura:component>

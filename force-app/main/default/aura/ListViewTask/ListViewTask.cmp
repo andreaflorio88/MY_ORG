@@ -1,0 +1,7 @@
+<aura:component controller="ListViewTaskController" implements="force:appHostable,flexipage:availableForAllPageTypes" access="global">
+    <ltng:require styles="/resource/slds0121/assets/styles/salesforce-lightning-design-system.min.css"/>
+    
+        
+   <aura:dependency resource="markup://force:navigateToList" type="EVENT"/>
+        <aura:handler name="init" value="{!this}" action="{!c.gotoList}"/>    
+ </aura:component>

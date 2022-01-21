@@ -1,0 +1,21 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" 
+                controller="LightningDataTableController">
+    <!--
+  Source : sfdcMonkey.com
+  API : 45.00
+  Date : 3/13/2019
+-->
+
+    <aura:handler name="init" value="{!this}" action="{!c.fetchAccountDetails}"/>
+    
+    <aura:attribute type="account[]" name="accountList"/>
+    <aura:attribute name="tableCol" type="List"/>
+    
+    <lightning:datatable data="{! v.accountList }" 
+                         columns="{! v.tableCol }"
+                         keyField="id"
+                         hideCheckboxColumn="true"
+                         resizeStep="80"
+                         />
+
+</aura:component>

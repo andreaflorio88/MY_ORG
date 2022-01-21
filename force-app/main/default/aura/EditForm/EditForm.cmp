@@ -1,0 +1,22 @@
+<aura:component controller="EditForm" implements="force:lightningQuickActionWithoutHeader,force:appHostable,force:hasRecordId">
+    <aura:attribute name="recordId" type="Id"/>	
+   
+    <lightning:recordEditForm 
+                              objectApiName="Account" 
+                              recordId="{!v.recordId}" 
+                              aura:Id="ReAura">
+    <div>
+    		<lightning:inputField aura:id="AuraName" fieldName="Name" />
+            <lightning:inputField aura:id="AuraEmail" fieldName="Email__c" />
+            <lightning:inputField aura:id="AuraFax" fieldName="Fax" />
+            <lightning:inputField aura:id="AuraPhone" fieldName="Phone" />
+        	<lightning:inputField aura:id="AuraType" fieldName="Type" />
+        	<lightning:inputField aura:id="AuraAsset" fieldName="Asset__c" />
+    </div>
+    <div><br></br>
+        <lightning:button label="save" onclick="{!c.save}"></lightning:button>
+        <lightning:button label="cancel" onclick="{!c.cancel}"></lightning:button>
+    </div>
+    </lightning:recordEditForm>	
+   
+</aura:component>

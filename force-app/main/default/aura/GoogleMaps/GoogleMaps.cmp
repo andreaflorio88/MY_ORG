@@ -1,0 +1,15 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+	<!-- attributes -->
+    <aura:attribute name="recordId" type="Id"/>
+    <aura:attribute name="mapMarkers" type="Object"/>
+    <aura:attribute name="zoomLevel" type="Integer" />
+
+    <!-- handlers-->
+    <aura:handler name="init" value="{! this }" action="{! c.init }"/>
+    
+	
+    <!-- the map component -->
+    <lightning:map 
+        mapMarkers="{! v.mapMarkers }" 
+        zoomLevel="{!v.zoomLevel}" />
+</aura:component>

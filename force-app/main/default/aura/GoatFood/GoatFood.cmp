@@ -1,0 +1,7 @@
+<aura:component >
+	<p>list1</p>
+    <p>list2</p>
+    <p>list3</p>
+    <p>list4</p>
+    <p>list5</p>
+</aura:component>

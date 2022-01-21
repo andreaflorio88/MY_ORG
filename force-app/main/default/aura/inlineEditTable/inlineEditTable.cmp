@@ -1,0 +1,41 @@
+<aura:component controller="inlineEditCtrl" implements="flexipage:availableForAllPageTypes,force:hasRecordId,force:appHostable">   
+   <!--Init handler which is call initRecords js function on component Load-->  
+    <aura:handler name="init" value="{!this}" action="{!c.initRecords}"/>
+    
+    <!--declare aura attributes-->
+    <aura:attribute name="AccountList" type="account[]" description="store account records list"/>
+    <aura:attribute name="showSaveCancelBtn" type="boolean" default="false" description="flag for rendered save and cancel buttons in aura:if "/>
+    
+    <div class="slds-m-around_large">
+        <!-- use aura:if for show/hide buttons --> 
+        <aura:if isTrue="{!v.showSaveCancelBtn}">
+            <!--button for save and cancel Record after Inline Edit-->
+            <lightning:buttonGroup class="slds-m-around_medium">
+                <lightning:button label="Cancel" onclick="{!c.cancel}"/>
+                <lightning:button label="Save" onclick="{!c.Save}" variant="success"/>
+            </lightning:buttonGroup>
+        </aura:if> 
+ 
+        <!--Data Table-->     
+        <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+            <thead>
+                <tr class="slds-text-title--caps">
+                  <th scope="col"><div class="slds-truncate" title="Id">S.No</div></th> 
+                  <th scope="col"><div class="slds-truncate" title="Account Name">Account Name</div></th>
+                  <th scope="col"><div class="slds-truncate" title="Website">Website</div></th>
+                  <th scope="col"><div class="slds-truncate" title="Rating">Rating</div></th>
+                </tr>
+            </thead>
+            
+            <tbody>
+             <!--### display all records of AccountList attribute one by one by aura:iteration ###-->
+                <aura:iteration items="{!v.AccountList}" var="acc" indexVar="sNo">
+                   <!-- Child Lightning Component --> 
+                    <c:inlineEditRow singleRec="{!acc}"
+                                     showSaveCancelBtn="{!v.showSaveCancelBtn}"
+                                     sNo="{!sNo + 1}" />
+                </aura:iteration>
+            </tbody>
+        </table>
+    </div>
+</aura:component>

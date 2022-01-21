@@ -1,0 +1,42 @@
+<!--
+ - Created by cge01625 on 03/07/2019.
+ -->
+
+<!-- searchLog -->
+<template>
+    <lightning-card  variant="Narrow"  title="Ricerca Log" icon-name="standard:logging">
+        <lightning-layout horizontal-align="center" vertical-align="end" multiple-rows="yes">
+            <lightning-layout-item size="3"></lightning-layout-item>
+            <lightning-layout-item size="6">
+
+                    <p if:true={queryTerm} class="slds-align--absolute-center">
+                        Offerta in ricerca {queryTerm}
+                    </p>
+                    <br />
+                    <div onkeyup={handleKeyUp}>
+                        <lightning-input
+                                name="enter-search"
+                                label="Premi 'invio' per iniziare la ricerca"
+                                type="search"
+                        ></lightning-input>
+                    </div>
+                    <br />
+
+            </lightning-layout-item>
+            <lightning-layout-item size="3"></lightning-layout-item>
+            <lightning-layout-item size="1"></lightning-layout-item>
+            <lightning-layout-item size="10">
+                <template if:true={data}>
+                    <lightning-datatable
+                            key-field="id"
+                            data={data}
+                            show-row-number-column
+                            row-number-offset={rowOffset}
+                            hide-checkbox-column
+                            columns={columns}>
+                    </lightning-datatable>
+                </template>
+            </lightning-layout-item>
+        </lightning-layout>
+    </lightning-card>
+</template>

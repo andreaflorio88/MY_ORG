@@ -1,0 +1,5 @@
+<apex:page controller="Cliente">
+    <apex:form >
+      <apex:detail subject="{!ClienteId}" relatedList="true" inlineEdit="true"/>
+    </apex:form>
+</apex:page>

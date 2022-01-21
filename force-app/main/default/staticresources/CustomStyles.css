@@ -1,0 +1,43 @@
+.titolo {
+    height: 60px;
+    width: 790px;
+    float: left;
+    background-image: url("sfondo1");
+    background-repeat: repeat;
+}
+
+.sfondo1 {
+    background-image: url("sfondo1");
+    background-repeat: repeat;
+    width: 100px;
+    height: 60px;
+}
+
+.sfondo2 {
+    background-image: url("sfondo2");
+    background-repeat: repeat;
+}
+
+body .bPageBlock .pbHeader {
+  background-color: red !important;
+}
+
+.pbHeader .pbTitle h2, .pbHeader .pbTitle h3 {
+     color: blue !important; 
+}
+
+.apexp .bPageBlock.apexDefaultPageBlock .pbBody .pbSubheader {
+    border-top: 0;
+    color: red !important;
+}
+
+
+body .pbBody table.list tr.headerRow td, body .pbBody table.list tr.headerRow th {
+    background: #f2f3f3;
+    border-width: 0 0 1px 1px;
+    border-color: #e0e3e5;
+    color: green !important;
+    font-size: .9em;
+    font-weight: bold;
+    padding: 5px 2px 4px 5px;
+}

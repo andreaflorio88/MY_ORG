@@ -1,0 +1,505 @@
+<apex:page showHeader="false" >
+   <html>
+      <head>
+         <title></title>
+         <meta name="ROBOTS" content="INDEX, FOLLOW"/>
+         <meta name="keywords" content=""/>
+         <meta name="description" content=""/>
+         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
+         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+         <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet"/>
+         <style class="main_style">
+            .layout-canvas-g {
+            background-color: #FFFFFF;
+            border: 0px;
+            box-sizing: border-box;
+            padding: 0px;
+            width: 100%;
+            }
+            .layout-canvas-g > .header, .layout-canvas-g > .section, .layout-canvas-g > .footer {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            overflow-wrap: break-word;
+            }
+            .layout-canvas-g > .section {
+            margin: 10px 0px;
+            }
+            .layout-canvas-g > .section > .columns {
+            box-sizing: border-box;
+            overflow-wrap: break-word;
+            }
+            body {
+            color: #5D5D62;
+            font-family: Tahoma, Geneva, sans-serif;
+            font-size: 16px;
+            margin: 0px auto;
+            max-width: 100%;
+            background-color: #E4E4E4;
+            line-height: 1.5;
+            padding: 0px;
+            }
+            @media only screen and (max-width: 480px) {
+            .mobile-hidden {
+            display: none !important;
+            }
+            .responsive-td {
+            width: 100% !important;
+            display: block !important;
+            padding: 0px !important;
+            }
+            }
+            .layout-canvas-g > .section > .columns {
+            width: 100%;
+            }
+            h1 {
+            font-family: Arial;
+            font-size: 28px;
+            color: #252525;
+            line-height: 1;
+            font-weight: bold;
+            font-style: normal;
+            }
+            h2 {
+            font-family: Arial;
+            font-size: 22px;
+            color: #202020;
+            line-height: 1;
+            font-weight: bold;
+            font-style: normal;
+            }
+            h3 { font-family: Arial;
+            font-size: 20px;
+            color: #202020;
+            line-height: 1;
+            font-weight: bold;
+            font-style: normal;
+            }
+            a[href]:not(.buttonstyles) {
+            color: #0000EE;
+            text-decoration: none;
+            }
+            button.buttonblock {
+            color: #FFFFFF;
+            border-radius: 3px;
+            background-color: #5D5D5D;
+            }
+            td.buttonblock {
+            color: #FFFFFF;
+            border-radius: 3px;
+            background-color: #5D5D5D;
+            }
+            a.buttonstyles {
+            font-family: Arial;
+            font-size: 16px;
+            color: #FFFFFF;
+            padding: 10px;
+            }
+            @media only screen and (max-width: 480px) {
+            body, .tb_properties {
+            font-family: Arial !important;
+            font-size: 16px !important;
+            color: #808080 !important;
+            line-height: 1 !important;
+            padding: 0px !important;
+            }
+            .buttonstyles {
+            font-family: Arial !important;
+            font-size: 16px !important;
+            color: #FFFFFF !important;
+            padding: 0px !important;
+            }
+            h1 {
+            font-family: Arial !important;
+            font-size: 22px !important;
+            color: #202020 !important;
+            line-height: 1 !important;
+            }
+            h2 {
+            font-family: Arial !important;
+            font-size: 20px !important;
+            color: #202020 !important;
+            line-height: 1 !important;
+            }
+            h3 {
+            font-family: Arial !important;
+            font-size: 18px !important;
+            color: #202020 !important;
+            line-height: 1 !important;
+            }
+            a:not(.buttonstyles) {
+            line-height: 1 !important;
+            }
+            .mobile-hidden {
+            display: none !important;
+            }
+            .responsive-td {
+            width: 100% !important;
+            display: block !important;
+            padding: 0px !important;
+            }
+            }
+            @media only screen and (max-width: 480px) {
+            body, .tb_properties {
+            font-family: Arial !important;
+            font-size: 16px !important;
+            color: #808080 !important;
+            line-height: 1 !important;
+            padding: 0px !important;
+            }
+            .buttonstyles {
+            font-family: Arial !important;
+            font-size: 16px !important;
+            color: #FFFFFF !important;
+            padding: 0px !important;
+            }
+            h1 {
+            font-family: Arial !important;
+            font-size: 22px !important;
+            color: #202020 !important;
+            line-height: 1 !important;
+            }
+            h2 {
+            font-family: Arial !important;
+            font-size: 20px !important;
+            color: #202020 !important;
+            line-height: 1 !important;
+            }
+            h3 {
+            font-family: Arial !important;
+            font-size: 18px !important;
+            color: #202020 !important;
+            line-height: 1 !important;
+            }
+            a:not(.buttonstyles) {
+            line-height: 1 !important;
+            }
+            .mobile-hidden {
+            display: none !important;
+            }
+            .responsive-td {
+            width: 100% !important;
+            display: block !important;
+            padding: 0px !important;
+            }
+            }
+            @media only screen and (max-width: 480px) {
+            body, .tb_properties {
+            font-family: Arial !important;
+            font-size: 16px !important;
+            color: #808080 !important;
+            line-height: 1.5 !important;
+            padding: 0px !important;
+            }
+            .buttonstyles {
+            font-family: Arial !important;
+            font-size: 16px !important;
+            color: #FFFFFF !important;
+            padding: 0px !important;
+            }
+            h1 {
+            font-family: Arial !important;
+            font-size: 22px !important;
+            color: #202020 !important;
+            line-height: 1 !important;
+            }
+            h2 {
+            font-family: Arial !important;
+            font-size: 20px !important;
+            color: #202020 !important;
+            line-height: 1 !important;
+            }
+            h3 {
+            font-family: Arial !important;
+            font-size: 18px !important;
+            color: #202020 !important;
+            line-height: 1 !important;
+            }
+            a:not(.buttonstyles) {
+            line-height: 1 !important;
+            }
+            .mobile-hidden {
+            display: none !important;
+            }
+            .responsive-td {
+            width: 100% !important;
+            display: block !important;
+            padding: 0px !important;
+            }
+            }
+            @media only screen and (max-width: 480px) {
+            body, .tb_properties {
+            font-family: Arial !important;
+            font-size: 16px !important;
+            color: #5D5D62 !important;
+            line-height: 1.5 !important;
+            padding: 0px !important;
+            }
+            .buttonstyles {
+            font-family: Arial !important;
+            font-size: 16px !important;
+            color: #FFFFFF !important;
+            padding: 0px !important;
+            }
+            h1 {
+            font-family: Arial !important;
+            font-size: 22px !important;
+            color: #252525 !important;
+            line-height: 1 !important;
+            }
+            h2 {
+            font-family: Arial !important;
+            font-size: 20px !important;
+            color: #202020 !important;
+            line-height: 1 !important;
+            }
+            h3 {
+            font-family: Arial !important;
+            font-size: 18px !important;
+            color: #202020 !important;
+            line-height: 1 !important;
+            }
+            a:not(.buttonstyles) {
+            line-height: 1 !important;
+            }
+            .mobile-hidden {
+            display: none !important;
+            }
+            .responsive-td {
+            width: 100% !important;
+            display: block !important;
+            padding: 0px !important;
+            }
+            }
+            @media only screen and (max-width: 480px) {
+            body, .tb_properties {
+            font-family: Arial !important;
+            font-size: 16px !important;
+            color: #5D5D62 !important;
+            line-height: 1.5 !important;
+            padding: 0px !important;
+            }
+            .buttonstyles {
+            font-family: Arial !important;
+            font-size: 16px !important;
+            color: #FFFFFF !important;
+            padding: 0px !important;
+            }
+            h1 {
+            font-family: Arial !important;
+            font-size: 22px !important;
+            color: #252525 !important;
+            line-height: 1 !important;
+            }
+            h2 {
+            font-family: Arial !important;
+            font-size: 20px !important;
+            color: #202020 !important;
+            line-height: 1 !important;
+            }
+            h3 {
+            font-family: Arial !important;
+            font-size: 18px !important;
+            color: #202020 !important;
+            line-height: 1 !important;
+            }
+            a:not(.buttonstyles) {
+            line-height: 1 !important;
+            }
+            .mobile-hidden {
+            display: none !important;
+            }
+            .responsive-td {
+            width: 100% !important;
+            display: block !important;
+            padding: 0px !important;
+            }
+            }
+            @media only screen and (max-width:480px){
+            /* MOBILE GLOBAL STYLES - DO NOT CHANGE */
+            body, .tb_properties {
+            font-family: Arial !important;
+            font-size: 16px !important;
+            color: #5D5D62 !important;
+            line-height: 1.5 !important;
+            padding: 0px !important;
+            }
+            .buttonstyles{
+            font-family: Arial !important;
+            font-size: 16px !important;
+            color: #FFFFFF !important;
+            padding: 0px !important;
+            }
+            h1 {
+            font-family: Arial !important;
+            font-size: 22px !important;
+            color: #252525 !important;
+            line-height: 1 !important;
+            }
+            h2 {
+            font-family: Arial !important;
+            font-size: 20px !important;
+            color: #202020 !important;
+            line-height: 1 !important;
+            }
+            h3 {
+            font-family: Arial !important;
+            font-size: 18px !important;
+            color: #202020 !important;
+            line-height: 1 !important;
+            }
+            a:not(.buttonstyles){
+            line-height: 1 !important;
+            }
+            .mobile-hidden{
+            display: none !important;
+            }
+            .responsive-td {
+            width: 100% !important;
+            display: block !important;
+            padding: 0 !important;
+            }
+            /* END OF MOBILE GLOBAL STYLES - DO NOT CHANGE */
+            }
+         </style>
+         <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+         <script type="text/javascript" src="//mc.s10.exacttarget.com/cloudpages/utilities/t.js"></script>
+         <script type="text/javascript">var ctx=new Fuel.TrackingContext(100015657,100014861);var t=new Fuel.Tracking(ctx,{siteid:'138277',pageid:'392',isMobile:'false'});t.wrapLinks(null,'CLOUDPAGESCLICK');t.addRawEvent('CLOUDPAGESVISIT',{pageid:'392'});t.send();</script>
+         <script type="text/javascript">window.contentDetail={"isSite":true,"mid":100015657,"eid":100014861,"pageID":392,"siteID":138277,"isMobile":false};</script>
+      </head>
+      <body>
+         <div class="layout layout-canvas-g">
+            <div class="section">
+               <div class="columns col1">
+                  <div class="stylingblock-content-wrapper camarker-inner">
+                     <table cellspacing="0" cellpadding="0" style="width: 100%;">
+                        <tbody>
+                           <tr>
+                              <td>
+                                 <table cellspacing="0" cellpadding="0" style="width: 100%;">
+                                    <tbody>
+                                       <tr>
+                                          <td valign="top" class="responsive-td" style="width: 100%;">
+                                             <div class="stylingblock-content-wrapper camarker-inner" style="">
+                                                <table width="100%" cellspacing="0" cellpadding="0">
+                                                   <tbody>
+                                                      <tr>
+                                                         <td align="center">
+                                                            <img data-assetid="19355" src="http://iqositalia.it/wp-content/uploads/2018/10/header-optin-optout.jpg" height="940" width="1920" style="display: block; padding: 0px; text-align: center; height: auto; width: 100%; border: 0px;"/>
+                                                         </td>
+                                                      </tr>
+                                                   </tbody>
+                                                </table>
+                                             </div>
+                                          </td>
+                                       </tr>
+                                    </tbody>
+                                 </table>
+                              </td>
+                           </tr>
+                        </tbody>
+                     </table>
+                  </div>
+                  <div style="padding: 10px;" class="stylingblock-content-wrapper camarker-inner">
+                     <table cellspacing="0" cellpadding="0" style="width: 100%;">
+                        <tbody>
+                           <tr>
+                              <td>
+                                 <table cellspacing="0" cellpadding="0" style="width: 100%;">
+                                    <tbody>
+                                       <tr>
+                                          <td valign="top" class="responsive-td" style="width: 100%; padding-bottom: 3px;">
+                                             <div style="margin: 40px 20px; padding: 0px;" class="stylingblock-content-wrapper camarker-inner">
+                                                <style type="text/css">
+                                                   .box-line {
+                                                   position: relative;
+                                                   padding: 10px 0;
+                                                   }
+                                                   .color-line {
+                                                   height: 3px;
+                                                   width: 60px;
+                                                   background: #D6A76F;
+                                                   position: absolute;
+                                                   left: 50%;
+                                                   top: 0;
+                                                   transform: translateX(-50%);
+                                                   }
+                                                </style>
+                                                <div style="text-align: center;">
+                                                   <apex:outputPanel id="mainPanel" rendered="{}">
+                                                      <h1 style="color:#202020;font-family:'noto sans';font-size:28px;font-style:normal;font-weight:bold;line-height:1; margin-bottom: 40px;">
+                                                         Ci dispiace sapere che non vuoi più ricevere informazioni su IQOS.
+                                                      </h1>
+                                                      <br/><br/>
+                                                      <div class="box-line" style="">
+                                                         <div class="color-line"></div>
+                                                      </div>
+                                                      <apex:form >
+                                                         <div style="text-align:center; ">
+                                                            <div style="text-align:left; DISPLAY:TABLE; margin: 0 auto">
+                                                               <apex:inputCheckbox />
+                                                               Non voglio più ricevere comunicazioni sul programma di Loyalty IQOS Club
+                                                               <br/>
+                                                               <apex:inputCheckbox />
+                                                               Non voglio più ricevere informazioni dal team IQOS   
+                                                            </div>
+                                                         </div>
+                                                         <br/>
+                                                      </apex:form>
+                                                      <p style="font-family: 'Noto Sans'">
+                                                         Se in futuro cambierai idea e vorrai di nuovo ricevere comunicazioni e offerte speciali, ti basterà accedere
+                                                         <a alias="" conversion="false" data-linkto="https://" href="https://urldefense.proofpoint.com/v2/url?u=https-3A__it.iqos.com_profiles-2Dupdate&d=DwMGaQ&c=eIGjsITfXP_y-DLLX0uEHXJvU8nOHrUK8IrwNKOtkVU&r=91853x347FL8FC5UEEQyYieKBlY-JLe0zkzdSurnCaA&m=0Df88fApTxJixAgag1aFjqPdElCyh8nAdZJMkgT6lvs&s=hJ2fk-Dzm35NFhRbIhWCf32ujhKMeWwFp2mZqg2XeQg&e=" style="color:#D6A76F;text-decoration:none;" title="">al tuo profilo</a>
+                                                         su IQOS.COM e riattivare l’opzione relativa.
+                                                         <apex:form >
+                                                            <apex:commandButton value="Clicca qui" action="{!submitUnsubscribe}" title="Cliccami" />
+                                                         </apex:form>
+                                                      </p>
+                                                   </apex:outputPanel>
+                                                   <apex:outputPanel rendered="{}">
+                                                      <h1 style="color:#202020;font-family:'noto sans';font-size:28px;font-style:normal;font-weight:bold;line-height:1; margin-bottom: 40px;">
+                                                         CONGRATULAZIONI TI SEI DISISCRITTO
+                                                      </h1>
+                                                      <br/><br/>
+                                                      <div class="box-line" style="">
+                                                         <div class="color-line"></div>
+                                                      </div>
+                                                   </apex:outputPanel>
+                                                </div>
+                                             </div>
+                                          </td>
+                                       </tr>
+                                    </tbody>
+                                 </table>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 <table cellspacing="0" cellpadding="0" style="width: 100%;">
+                                    <tbody>
+                                       <tr>
+                                          <td valign="top" class="responsive-td" style="width: 100%; padding-top: 3px;">
+                                             <div style="border-color: #E4E4E4; border-style: solid; border-width: 1px 0px; margin: 0px; padding: 0px; " class="stylingblock-content-wrapper camarker-inner">
+                                                <style type="text/css"></style>
+                                                <br/>
+                                                <div style="text-align: center;">
+                                                   <h3 style="color:#202020;font-family:'noto sans';font-size:19px;font-style:normal;font-weight:bold;line-height:1; margin: 40px;">
+                                                      Prodotto non privo di rischi. Destinato ai fumatori adulti
+                                                   </h3>
+                                                </div>
+                                                <br/>
+                                             </div>
+                                          </td>
+                                       </tr>
+                                    </tbody>
+                                 </table>
+                              </td>
+                           </tr>
+                        </tbody>
+                     </table>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </body>
+   </html>
+</apex:page>

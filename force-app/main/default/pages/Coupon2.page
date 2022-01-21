@@ -1,0 +1,223 @@
+<apex:page >
+    
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<meta http-equiv="x-ua-compatible" content="ie=edge"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no" />
+	<meta name="theme-color" content="#ffffff"/>
+    <link rel="icon" href="https://iqositalia.it/wp-content/themes/iqos/assets/images/favicons/iqos-favicon-32.png" type="image/gif" sizes="16x16"/>
+  <!--- include css --->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,700" rel="stylesheet"/>
+  <title>Survey page</title>
+</head>
+<body>
+  <!--- custom navbar ---->
+  <div class="navbar-top">
+    <nav id="menu">
+      <a href="https://iqositalia.it" class="menu-logo">
+        <img src="https://iqositalia.it/wp-content/themes/iqos/assets/images/iqos-logo.svg"/>
+      </a>
+    </nav>
+  </div>
+  <!--- end custom navbar ---->
+  <!--- content page --->
+  <div class="box-title background">
+    <div class="wrap-title">
+      <p class="title-1">Sei a un passo dal tuo</p>
+      <p class="title-2">sconto di 70 euro</p>
+    </div>
+    <!-- <div class="wrap-separator">
+      <div class="separator"></div>
+    </div> -->
+  </div>
+  <div class="container box-detail">
+    <div class="row">
+      <div class="col-sm-12">
+        <p class="title-code-1">Come descriveresti il tuo</p>
+        <p class="title-code-2">uso di IQOS?</p>
+      </div>
+    </div>
+    <div class="row margin-top">
+      <div class="col-md-2 col-sm-12"></div>
+      <div class="col-md-8 col-sm-12 background col-answer">
+        <a href="#" target="_blank" class="link_custom">
+          <p class="answer-custom">
+            <span class="btn-custom"></span>
+             Non uso IQOS nè altri prodotti legali al tabacco
+          </p>
+        </a>
+        <a href="#" target="_blank" class="link_custom">
+          <p class="answer-custom">
+            <span class="btn-custom"></span>
+              Non uso IQOS ma continuo a fumare sigarette
+          </p>
+        </a>
+        <a href="#" target="_blank" class="link_custom">
+          <p class="answer-custom">
+            <span class="btn-custom"></span>
+              Uso IQOS più delle sigarette
+          </p>
+        </a>
+        <a href="#" target="_blank" class="link_custom">
+          <p class="answer-custom">
+            <span class="btn-custom"></span>
+              Uso IQOS meno delle sigarette
+          </p>
+        </a>
+        <a href="#" target="_blank" class="link_custom">
+          <p class="answer-custom" style="margin-bottom:0;">
+            <span class="btn-custom"></span>
+              Uso esclusivamente IQOS
+          </p>
+        </a>
+      </div>
+      <div class="col-md-2 col-sm-12"></div>
+    </div>
+  </div>
+  <!--- end content page --->
+</body>
+    <head>
+	<meta charset="utf-8"/>
+	<meta http-equiv="x-ua-compatible" content="ie=edge"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no" />
+	<meta name="theme-color" content="#ffffff"/>
+  <link rel="icon" href="https://iqositalia.it/wp-content/themes/iqos/assets/images/favicons/iqos-favicon-32.png" type="image/gif" sizes="16x16"/>
+  <!--- include css --->
+	<link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,700" rel="stylesheet"/>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
+  <title>thank-you page</title>
+</head>
+</html>
+
+<style media="screen">
+  .wrap-title {
+    position: absolute;
+    left: auto;
+    right: auto;
+    width: 100%;
+    top: 55%;
+    transform: translateY(-50%);
+  }
+  .menu-logo {
+    margin: auto;
+  }
+  .menu-logo img{
+    height:18px;
+  }
+  #menu {
+    width: 100%;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    background: linear-gradient(90deg, #010103 0%, #22232E 51.04%, #010103 100%);
+    padding: 0 40px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow-y: auto;
+    z-index: 999;
+}
+  .answer-custom:hover .btn-custom {
+    background:#b27b40;
+    transition: 0.4s background;
+  }
+  .link_custom {
+    color: #000 !important;
+    text-decoration:none !important;
+  }
+  .link_custom:hover {
+    color: #000;
+  }
+  .answer-custom {
+    padding-left: 30px;
+    padding-right: 30px;
+    font-size: 18px;
+    line-height: 26px;
+    color: #8d8d95;
+  }
+
+  span.btn-custom {
+    height: 20px;
+    width: 8px;
+    background: #dfa96f;
+    position: absolute;
+    transform: translate(-20px, 2px);
+    border-radius: 10px;
+  }
+  .col-answer {
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+  @media (min-width:1024px) {
+    .col-answer {
+      padding-left: 30px;
+      padding-right: 30px;
+    }
+	}
+  @media (max-width:768px) {
+    .col-answer {
+      padding-left: 28px;
+    }
+  }
+  .background {
+    background: #f8f8f8;
+  }
+  .margin-top {
+    margin-top:40px;
+  }
+  .title-code-1, .title-code-2 {
+    font-size: 30px;
+    font-weight: 500;
+    text-align:center;
+    margin-bottom:0;
+    line-height: 40px;
+    color: #3b3b3b;
+    font-family: 'Noto Sans', sans-serif;
+  }
+  .box-detail {
+    margin-top:30px;
+    margin-bottom:30px;
+  }
+  .box-title {
+    height:300px;
+    width:100%;
+    position: relative;
+  }
+  .title-2 {
+    margin-top:-10px;
+  }
+  .title-1 ,.title-2 {
+    color: #3b3b3b;
+    font-size: 36px;
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    font-weight: 800;
+    padding-left: 15px;
+    padding-right: 15px;
+    line-height: 40px;
+    font-family: 'Noto Sans', sans-serif;
+  }
+  .wrap-separator {
+    position:relative;
+    height:10px;
+    width:100%;
+    margin-top:50px;
+  }
+  .separator {
+    position: absolute;
+    height: 5px;
+    width: 200px;
+    background: #dfa96f;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 50px;
+  }
+
+
+</style>
+
+</apex:page>

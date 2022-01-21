@@ -1,0 +1,5 @@
+<apex:component >
+    
+     <apex:enhancedList type="Activity" height="725" rowsPerPage="50" id="Activities" customizable="true" />
+
+</apex:component>

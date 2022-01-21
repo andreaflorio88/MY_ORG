@@ -1,0 +1,24 @@
+<template>
+    <lightning-card>
+        <h3 slot="title">
+            <lightning-icon icon-name="utility:connected_apps" size="small"></lightning-icon>
+            Audit Log Viewer
+        </h3>
+        <div style="height:250px">
+          <lightning-datatable
+            data={records}
+            columns={columns}
+            key-field="Id"
+            hide-checkbox-column
+            show-row-number-column
+            enable-infinite-loading
+            onrowaction={handleRowAction}
+            onloadmore={loadMoreData}
+          >
+          </lightning-datatable>
+        </div>
+        <div slot="footer">
+          {error}
+        </div>
+    </lightning-card>
+</template>

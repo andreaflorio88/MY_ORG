@@ -1,0 +1,17 @@
+<template>
+    <div style="margin-bottom: 1rem">
+        <lightning-layout horizontal-align="spread">
+            <lightning-layout-item flexibility="auto">
+                <a data-action="View" class="customLink" onclick={handleClickSoluzione}>{soluzione.Name}</a><br/>
+                <span class="slds-item_label slds-text-color_weak slds-truncate">Tipo Soluzione:</span>
+                <span class="customText">{soluzione.Tipo_Soluzione__c}</span>
+            </lightning-layout-item>
+            <lightning-layout-item flexibility="auto">
+                <lightning-button-menu alternative-text="Show menu" menu-alignment="right" variant="border-filled" icon-size="x-small">
+                    <lightning-menu-item data-action="Edit" value="Edit" label={label.Edit} onclick={handleClickSoluzione}></lightning-menu-item>
+                    <lightning-menu-item data-action="Delete" value="Delete" label={label.Delete} onclick={handleClickSoluzione}></lightning-menu-item>
+                </lightning-button-menu>
+            </lightning-layout-item>
+        </lightning-layout>
+    </div>
+</template>

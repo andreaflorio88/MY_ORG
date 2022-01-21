@@ -1,0 +1,75 @@
+.THIS .titleFeed{
+    margin-left: .75rem;    
+    font-weight: bold;
+}
+
+.THIS .titleContainer{
+    display:inline-block; 
+    float:left
+}
+
+.THIS .sollecitoContainer{
+    width:50%;
+    display:inline-block; 
+    float:right; 
+    font-size:0.8rem;
+}
+
+.THIS .sollecitoButton{
+    margin-top: .5rem;
+    float:right;
+}
+
+.THIS .titleFeed:hover{
+    cursor: pointer;
+}
+
+.THIS .card-container{
+    margin: 0 1rem;
+}
+
+.THIS .icon-container{
+    margin-top: .5rem;
+    margin-bottom: .25rem;
+    width: 50%;
+    display: inline-block;
+}
+
+.THIS .icon{
+    height: 2rem;
+    width: 2rem;
+}
+
+.THIS .customer_positive_icon svg:hover{
+    cursor: pointer;
+    fill: #74ff38;
+}
+
+.THIS .customer_neutral_icon svg:hover{
+    cursor: pointer;
+    fill: #fff352;
+}
+
+.THIS .customer_negative_icon svg:hover{
+    cursor: pointer;
+    fill: #fa4343;
+}
+
+.THIS .positive svg{
+    cursor: pointer;
+    fill: #74ff38;
+}
+
+.THIS .neutral svg{
+    cursor: pointer;
+    fill: #fff352;
+}
+
+.THIS .negative svg{
+    cursor: pointer;
+    fill: #fa4343;
+}
+
+.THIS .error{    
+    color: #C23934;
+}

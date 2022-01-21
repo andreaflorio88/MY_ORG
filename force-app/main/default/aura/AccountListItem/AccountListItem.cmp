@@ -1,0 +1,4 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickAction" access="global" >
+    <aura:attribute name="account" type="Account"/>
+    <li><a>{!v.account.Name}</a></li>
+</aura:component>

@@ -1,0 +1,28 @@
+<aura:component controller="CreateNewAccount" implements="force:lightningQuickActionWithoutHeader,force:hasRecordId">
+	<aura:attribute name="account" type="Account" />
+    <aura:attribute name="newContact" type="Contact" default="{ 'sobjectType': 'Contact' }" />
+    <aura:attribute name="alertfirst" type="Boolean" default="false" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <force:recordData aura:id="recordLoader"
+    targetFields="{!v.newContact}"
+    recordUpdated="{!c.RecordUpdated}"                  
+    />
+    
+	<!-- Display the new contact form -->
+	<div class="Create Contact">
+      <lightning:card iconName="action:new_contact" title="Create New Contact">           	
+    	<lightning:input label="First Name" value="{!v.newContact.FirstName}" required="true" aura:id="firstname" onchange="{!c.canEnabledButton}"/>
+        <lightning:input label="Last Name" value="{!v.newContact.LastName}" required="true" aura:id="lastname" onchange="{!c.canEnabledButton}"/>
+        <lightning:input label="Phone" value="{!v.newContact.Phone}"
+		pattern="^(1?(-?\d{3})-?)?(\d{3})(-?\d{4})$" aura:id="phoneId" 
+	    messageWhenPatternMismatch="Number not valid" onchange="{!c.canEnabledButton}"/>
+        <lightning:input aura:id="mphoneid" label="Mobile" value="{!v.newContact.MobilePhone}" 
+        pattern="^(1?(-?\d{3})-?)?(\d{3})(-?\d{4})$"
+        messageWhenPatternMismatch="Number not valid" onchange="{!c.canEnabledButton}"/>
+        <br></br>
+        <lightning:button name ="saveButton" label="Save Contact" variant="brand" onclick="{!c.saveContact}" aura:id="saveButton"/>
+      </lightning:card>
+	</div>
+	<c:ErrorMessage alert="{!v.alertfirst}"/>
+</aura:component>

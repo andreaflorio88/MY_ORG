@@ -1,0 +1,7 @@
+<aura:component controller="TreeNodeDataProvider" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:attribute name="nodes" type="Object" />
+    <aura:handler name="init" value="{!this}" action="{!c.init}" />
+    <aura:iteration items="{!v.nodes}" var="node">
+        <c:TreeNode node="{!node}" />
+    </aura:iteration>
+</aura:component>

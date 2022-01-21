@@ -1,0 +1,29 @@
+.activity-container{
+    margin: 0rem 1rem;
+}
+
+.refresh-icon{
+    margin-left: .5rem;
+    cursor: pointer;
+    float: right;
+}
+
+.activity-text-padding{
+    width: 90%;
+    padding-left: .5rem;
+    display: inline-block;
+}
+
+.text-task-container{
+    margin: .2rem 0rem .25rem .65rem;
+    border-left: .2rem solid #4bc076;
+}
+
+.text-event-container{
+    margin: .2rem 0rem .25rem .65rem;
+    border-left: .2rem solid #eb7092;
+}
+
+.text-padding{
+    padding-left: 1.25rem;
+}

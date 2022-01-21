@@ -1,0 +1,4 @@
+<aura:event type="COMPONENT" description="Event template" >
+    <aura:attribute name="rowIndex" type="Integer" />
+    <aura:attribute name="data" type="Object" />
+</aura:event>

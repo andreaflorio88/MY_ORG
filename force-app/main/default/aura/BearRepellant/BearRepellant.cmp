@@ -1,0 +1,5 @@
+<aura:component >
+	<p>prova1</p>
+    <p>prova2</p>
+    <p>prova3</p>
+</aura:component>

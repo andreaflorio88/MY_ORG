@@ -1,0 +1,12 @@
+<!-- Form.cmp -->
+<aura:component > 
+
+   <aura:attribute name="messageFromEvent" type="String"/> 
+
+   <aura:handler name="cmpEvent" event="c:ButtonEvent" action="{!c.handleComponentEvent}"/> 
+
+   <c:CustomButton /> 
+
+   <p>{!v.messageFromEvent}</p> 
+
+</aura:component>

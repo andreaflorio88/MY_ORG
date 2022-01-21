@@ -1,0 +1,70 @@
+<apex:page Controller="MyControllerPreventivoList">
+
+
+
+<apex:form >
+
+<!-- Primo Blocco -->
+<apex:pageBlock title="Lista Clienti" tabStyle="Tappa__c">
+
+
+<!--Tasti-->
+<apex:pageBlockButtons location="top">
+      <apex:commandButton action="{!create}" value="New"/>
+</apex:pageBlockButtons>
+
+
+<apex:pageBlocksection title="Dettaglio Section Clienti">
+
+<!--Tabella-->
+<apex:pageBlockTable value="{!preventivolist}" var="pitem">
+
+<!--Hidden Field-->
+<apex:inputHidden value="{!pitem.Id}" id="dd" />
+
+            <apex:column headerValue="Id">
+                  <apex:outputText value="{!pitem.Id}"/>
+            </apex:column>
+            <apex:column headerValue="Name">
+                  <apex:outputText value="{!pitem.Name}"/>
+            </apex:column>
+            <apex:column headerValue="Nome">
+                  <apex:outputfield value="{!pitem.Nome__c}" >
+                  <apex:inlineEditSupport event="onclick" />
+                  </apex:outputfield>
+            </apex:column>
+            
+            <apex:column headerValue="Telefono">
+                  <apex:outputfield value="{!pitem.Telefono__c}" >
+                  <apex:inlineEditSupport event="onclick" />
+                  </apex:outputfield>
+            </apex:column>
+            
+            <apex:column headerValue="Udate">
+                  <apex:commandLink action="{!save1}" value="Update">
+                        <apex:param name="idkey" value="{!pitem.Id}" assignTo="{!idkeyclik}"> </apex:param>
+                  </apex:commandLink>
+            </apex:column>
+            <apex:column headerValue="Delete">
+                  <apex:commandLink action="{!cancella}" value="Delete">
+                        <apex:param name="idkey" value="{!pitem.Id}" assignTo="{!idkeyclik}"> </apex:param>
+                  </apex:commandLink>
+            </apex:column>
+          <apex:column headerValue="Detail">
+                  <apex:commandLink action="{!detail}" value="Detail">
+                        <apex:param name="idkey" value="{!pitem.Id}" assignTo="{!idkeyclik}"> </apex:param>
+                  </apex:commandLink>
+            </apex:column> 
+            <apex:column headerValue="Modify">
+                  <apex:commandLink action="{!modifica}" value="Edit">
+                        <apex:param name="idkey" value="{!pitem.Id}" assignTo="{!idkeyclik}"> </apex:param>
+                  </apex:commandLink>
+            </apex:column>
+
+</apex:pageBlockTable>
+</apex:pageBlocksection>
+
+</apex:pageBlock>
+
+</apex:form>
+</apex:page>

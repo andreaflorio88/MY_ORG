@@ -1,0 +1,7 @@
+/* align picklist inside list view*/
+.THIS .customCls{
+    margin-top: -10px;
+    width: 50%;
+    position: absolute;
+    right: 17px;
+}

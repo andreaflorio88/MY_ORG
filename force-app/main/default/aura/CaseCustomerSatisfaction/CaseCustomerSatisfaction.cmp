@@ -1,0 +1,35 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" controller="CaseCustomerSatisfactionClass" access="global" >
+    <lightning:notificationsLibrary aura:id="notifLib"/>    
+    <aura:handler name="render" value="{!this}" action="{!c.onRender}"/>
+    <aura:attribute name="showSpinner" type="Boolean" />
+    
+    <lightning:card aura:id="card">
+        <aura:set attribute="title">
+            <div class="titleContainer">
+                <lightning:icon iconName="standard:rtc_presence" size="small"/>
+                <span class="titleFeed">{!$Label.c.Satisfaction}</span>
+            </div>
+        </aura:set>
+        <div class="card-container">
+            <aura:if isTrue="{!v.showSpinner}">
+                <lightning:spinner aura:id="spinner" size="small"/>
+            </aura:if>
+            <div>                               
+                <span>{!$Label.c.CustomerSatisfaction}</span><br/>
+                <div>
+                    <div class="icon-container">
+                        <lightning:icon aura:id="svg_positive" class="icon customer_positive_icon" 
+                                        iconName="utility:emoji" onclick="{!c.handleCustomerPositive}" alternativeText="Positive" /> &nbsp;
+                        <lightning:icon aura:id="svg_neutral" class="icon customer_neutral_icon"
+                                        iconName="utility:sentiment_neutral" onclick="{!c.handleCustomerNeutral}" alternativeText="Neutral" /> &nbsp;
+                        <lightning:icon aura:id="svg_negative" class="icon customer_negative_icon"
+                                        iconName="utility:sentiment_negative" onclick="{!c.handleCustomerNegative}" alternativeText="Negative" /> &nbsp;
+                    </div>
+                    <div class="sollecitoContainer">
+                        <lightning:button class="sollecitoButton" label="{!$Label.c.Remind}" title="{!$Label.c.Remind}" onclick="{!c.handleSollecito}"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </lightning:card>    
+</aura:component>

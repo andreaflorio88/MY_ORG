@@ -1,0 +1,38 @@
+<aura:component implements="force:hasRecordId,flexipage:availableForRecordHome">
+    <aura:attribute name="contactRecord" type="Object"/>
+    <aura:attribute name="recordLoadError" type="String"/>
+    <aura:attribute name="data" type="Object"/>
+    <aura:attribute name="columns" type="List"/>
+    
+    <force:recordData aura:id="recordLoader"
+        recordId="{!v.recordId}"
+        fields="Name,Phone,Description"
+        targetFields="{!v.contactRecord}"
+        targetError="{!v.recordLoadError}"
+        recordUpdated="{!c.recordUpdated}"
+        mode="EDIT" 
+    />
+
+    <!-- Display error message -->
+    <aura:if isTrue="{!not(empty(v.recordSaveError))}">
+        <div class="recordSaveError">
+        </div>
+    </aura:if>
+        
+    <!-- Display the new contact form -->
+    <div class="Edit Contact">
+        <lightning:card iconName="action:edit" title="Update Account">
+            <div class="slds-p-horizontal--small">
+                <lightning:input label="Name" value="{!v.contactRecord.Name}" required="true"/>
+                
+                <lightning:input label="Phone" value="{!v.contactRecord.Phone}" required="true"/>
+ 
+                <lightning:input label="Description" value="{!v.contactRecord.Description}" />
+                <br/>
+                
+                <lightning:button label="Save" variant="brand" onclick="{!c.saveAccount}" />
+            </div>
+        </lightning:card>
+    </div>
+
+</aura:component>
