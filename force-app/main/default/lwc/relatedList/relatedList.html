@@ -1,0 +1,40 @@
+<template>
+
+    <div class="slds-modal__content">
+        <article class="slds-card_boundary customCard">
+            <div class="card-container">
+
+                <div class="slds-card__header slds-grid customGrid">
+                    <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                        <div class="slds-media__figure customIcon">
+                            <div class="slds-icon_container">
+                                <lightning-icon icon-name="standard:contact" title="Contacts" size="small"></lightning-icon>
+                                <div>
+                                    <span class="slds-assistive-text">Contacts</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slds-media__body customTitle">
+                            <h2 class="slds-card__header-title">
+                                <a href="javascript:void(0);" class="slds-card__header-link slds-truncate" onclick={goToRelatedList} title="Case History Sicurezza">
+                                    <span class="slds-text-heading_small">Contacts ({recordCount})</span>
+                                </a>
+                            </h2>
+                        </div>
+                    </header>    
+                </div>
+
+                <div class="customTable">
+                    <lightning-datatable
+                        key-field="id"
+                        columns={columns}
+                        data={records}
+                        onrowaction={handleRowAction}
+                        hide-checkbox-column>
+                    </lightning-datatable>
+                </div>
+            </div>
+        </article>
+    </div>
+    
+</template>
