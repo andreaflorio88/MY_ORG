@@ -7,5 +7,5 @@ public with sharing class LWCDataTableSortingExample {
             query += ' ORDER BY '+field+' '+sortOrder;
         }
         return Database.query(query);
-    }
+    }   
 }
