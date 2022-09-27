@@ -1,0 +1,26 @@
+<template>
+
+    <div class="slds-is-relative">
+        <div if:true={isLoaded}>
+            <lightning-spinner
+                    alternative-text="Loading...">
+            </lightning-spinner>
+        </div>
+
+        
+        <lightning-input type="email" label="FromAddress" required onchange={onchangeEvent}></lightning-input>
+        <lightning-input type="email" label="ToAddress"></lightning-input>
+        <lightning-input type="email" label="BccAddress"></lightning-input>
+        <lightning-input type="text" label="Subject" placeholder="Enter Subject..."></lightning-input>
+        <br/>
+        <lightning-input-rich-text value={description}></lightning-input-rich-text>
+
+        <br/>
+
+        <div class="slds-modal__footer slds-align_absolute-center">
+            <lightning-button name="cancel" label="Cancella" variant="neutral"></lightning-button>
+            <lightning-button name="save" label="Invia" variant="brand"></lightning-button>
+        </div>
+
+    </div>
+</template>
