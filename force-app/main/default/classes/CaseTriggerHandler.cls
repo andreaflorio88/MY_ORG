@@ -4,6 +4,8 @@ public without sharing class CaseTriggerHandler extends TriggerHandler {
         Map<Id,Case> caseNewMap = (Map<Id,Case>)Trigger.NewMap;
     	Map<Id,Case> caseOldMap = (Map<Id,Case>)Trigger.OldMap;
   		buildFeed(caseNewMap, caseOldMap);
+
+        
     }
     
     
