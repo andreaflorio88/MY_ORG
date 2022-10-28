@@ -13,7 +13,7 @@ public class AccountDetailController {
     
     public PageReference modifica() {
         PageReference page = new Pagereference('/apex/AccountCustom?id=' + det.Id);
-        page.setRedirect(true);
+        page.setRedirect(true);//test
         return page;
       
     }
