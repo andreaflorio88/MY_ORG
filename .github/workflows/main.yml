@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  #push:
+  #  branches: [ produzione ]
+  pull_request:
+    branches: [ produzione ]
+    
+  jobs:
+    
+    build:
+      runs-on: ubuntu-latest
+      
+      steps:
+      
+      - uses: actions/checkout@v2
+      
+      - name: 'Build and Deploy'
+        run: |
+          wget https://developer.salesforce.com/media/salesforce-cli/sfdx-linux-amd64.tar.xz
+          mkdir sfdx-cli
+          tar xJf sfdx-linux-amd64.tar.xz -C sfdx-cli --strip-components 1
+          ./sfdx-cli/install
+          
+      - name: 'Authorize'
+        run: |
+          echo username value ${{ secrets.USERNAME }}
+          sfdx force:auth:jwt:grant --clientid=${{ secrets.CLIENT_ID }} --clientsecret=${{ secrets.CLIENT_SECRET }} --usename=${{ secrets.USERNAME }} --password=${{ secrets.PASSWORD }} --setdefaultusername --setalias=hub-org
+          
+      - name: 'Convert Metadata'
+        run: sfdx force:convert --rootdur=force-app --outpurdir=convert
+      - name: 'Run Test on Metadata'
+        run: sfdx force:mdapi:deploy --deploydir=convert --testlevel=RunLocalTests --checkonly -u hub-org
