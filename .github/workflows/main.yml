@@ -14,12 +14,11 @@ jobs:
           ./sfdx-cli/install
           
       - name: Authorize
-        name: 'Authorize'
         run: |
           echo username value ${{ secrets.USERNAME }}
           sfdx force:auth:jwt:grant --clientid=${{ secrets.CLIENT_ID }} --clientsecret=${{ secrets.CLIENT_SECRET }} --usename=${{ secrets.USERNAME }} --password=${{ secrets.PASSWORD }} --setdefaultusername --setalias=hub-org
           
-      - name: 'Convert Metadata'
+      - name: Convert Metadata
         run: sfdx force:convert --rootdur=force-app --outpurdir=convert
-      - name: 'Run Test on Metadata'
+      - name: Run Test on Metadata
         run: sfdx force:mdapi:deploy --deploydir=convert --testlevel=RunLocalTests --checkonly -u hub-org
