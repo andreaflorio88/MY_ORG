@@ -19,5 +19,29 @@ pipeline {
                 }
             }
         }
+        stage('Deploy') {
+            steps {
+                bat """
+                    ${SFDX_CLI} sf project deploy start ^
+                        --sourcepath manifest/package.xml ^
+                        --targetusername DevHub ^
+                        --wait 10 ^
+                        --verbose
+                    """
+            }
+        }
+    }
+    
+    post {
+        always {
+            // Cleanup or notification steps can be added here
+            echo 'Pipeline execution finished.'
+        }
+        success {
+            echo 'Deployment was successful!'
+        }
+        failure {
+            echo 'Deployment failed. Check the logs for details.'
+        }
     }
 }
