@@ -24,7 +24,8 @@ pipeline {
                 withCredentials([file(credentialsId: 'SERVER_KEY', variable: 'JWT_KEY')]) {
                     bat 'echo "Path to JWT_KEY: %JWT_KEY%"'
                     bat '''
-                    sfdx force:auth:jwt:grant --client-id 3MVG98Gq2O8Po4Zm6Dx8POjKJh1uGBbGl9QeBG7vEJDEl4JFgmOJJTDpXl3Lx8ksQpmDDsUt54xnXI_xBCsXk --jwt-key-file "%JWT_KEY%" --username andreaflorio88@yahoo.it.new --instance-url https://login.salesforce.com --set-default-dev-hub force:source:deploy --targetusername andreaflorio88@yahoo.it.new --manifest manifest/package.xml --verbose
+                    sfdx force:auth:jwt:grant --client-id 3MVG98Gq2O8Po4Zm6Dx8POjKJh1uGBbGl9QeBG7vEJDEl4JFgmOJJTDpXl3Lx8ksQpmDDsUt54xnXI_xBCsXk --jwt-key-file "%JWT_KEY%" --username andreaflorio88@yahoo.it.new --instance-url https://login.salesforce.com --set-default-dev-hub
+                    sfdx force:source:deploy --targetusername andreaflorio88@yahoo.it.new --manifest manifest/package.xml --verbose
                     '''
                 }
             }
