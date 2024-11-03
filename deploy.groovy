@@ -1,13 +1,7 @@
 pipeline {
     agent any
-    
-    options {
-        skipDefaultCheckout(true) // Skip the default SCM checkout
-    }
-    environment {
-        // Initialize NodeJS manually without using `tools` section
-        NODE_HOME = tool '18.14.2'
-        PATH = "${NODE_HOME}/bin:${env.PATH}"
+    tools {
+        nodejs '18.14.2'
     }
     stages {
         stage('Check SFDX Installation') {
