@@ -3,6 +3,9 @@ pipeline {
     tools {
         nodejs '18.14.2'
     }
+    options {
+        skipDefaultCheckout(true) // Skip the default SCM checkout
+    }
     stages {
         stage('Check SFDX Installation') {
             steps {
@@ -35,7 +38,7 @@ pipeline {
         }
     }
 
-    /*post {
+    post {
         always {
             // Cleanup or notification steps can be added here
             echo 'Pipeline execution finished.'
@@ -46,5 +49,5 @@ pipeline {
         failure {
             echo 'Deployment failed. Check the logs for details.'
         }
-    }*/
+    }
 }
