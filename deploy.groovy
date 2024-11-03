@@ -9,7 +9,7 @@ pipeline {
                 bat 'sfdx --version'
             }
         }
-        stage('Authenticate with Salesforce') {
+        stage('Salesforce Authentication') {
             steps {
                 withCredentials([file(credentialsId: 'SERVER_KEY', variable: 'JWT_KEY')]) {
                     bat 'echo "Path to JWT_KEY: %JWT_KEY%"'
@@ -35,7 +35,7 @@ pipeline {
         }
     }
 
-    post {
+    /*post {
         always {
             // Cleanup or notification steps can be added here
             echo 'Pipeline execution finished.'
@@ -46,5 +46,5 @@ pipeline {
         failure {
             echo 'Deployment failed. Check the logs for details.'
         }
-    }
+    }*/
 }
