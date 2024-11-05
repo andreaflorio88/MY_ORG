@@ -61,7 +61,7 @@ pipeline {
                             REQUEST = 'Deployment with test class'
                             echo "Running deploy with test class..."
                             bat """
-                            sf project deploy start --target-org andreaflorio88@yahoo.it.new --manifest ${manifestPath} --test-level RunSpecifiedTests ${classes}
+                            sf project deploy start --target-org andreaflorio88@yahoo.it.new --manifest ${manifestPath} --test-level RunSpecifiedTests ${classes} --wait 10 --verbose
                             """
                         }
                         else if(validation == 'true') {
