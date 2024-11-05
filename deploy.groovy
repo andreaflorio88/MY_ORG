@@ -39,13 +39,13 @@ pipeline {
                         def manifestPath = "manifest/${env.SF_ENV}"
                         
                         bat 'echo "Path to JWT_KEY: %JWT_KEY%"'
-                        bat '''
+                        bat """
                         sfdx force:auth:jwt:grant --client-id 3MVG98Gq2O8Po4Zm6Dx8POjKJh1uGBbGl9QeBG7vEJDEl4JFgmOJJTDpXl3Lx8ksQpmDDsUt54xnXI_xBCsXk --jwt-key-file "%JWT_KEY%" --username andreaflorio88@yahoo.it.new --instance-url https://login.salesforce.com --set-default
-                        '''
-    
-                        bat '''
+                        """
+                        
+                        bat """
                         sf project deploy start --target-org andreaflorio88@yahoo.it.new --manifest ${manifestPath} --wait 10 --verbose
-                        '''
+                        """
                     }
                 }
             }
