@@ -47,7 +47,7 @@ pipeline {
                         echo 'SF_VALIDATION: ' + "${SF_VALIDATION}"
                         echo 'TEST_CLASSES: ' + "${TEST_CLASSES}"
 
-                        if(test_classes != null) {
+                        if(TEST_CLASSES != null) {
                             classes = test_classes
                         }
 
