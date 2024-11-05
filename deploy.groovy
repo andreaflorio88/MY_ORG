@@ -7,7 +7,8 @@ pipeline {
         SF_ENV = "${params['Ambiente di destinazione']}"
         SF_VALIDATION = "${params['Solo validazione']}"
         PACKAGE = "${params['Package da utilizzare']}"
-        TESTS = "AccountTriggerHandlerTest,RiportafogliazioneTest"
+        TESTS = "--tests AccountTriggerHandlerTest RiportafogliazioneTest" + 
+                "--tests RiportafogliazioneTest" 
     }
     stages {
         stage('Check SFDX Installation') {
@@ -49,7 +50,7 @@ pipeline {
                         if(validation == 'true') {
                             echo "Running validation..."
                             bat """
-                            sf project deploy start --target-org andreaflorio88@yahoo.it.new --manifest ${manifestPath} --test-level RunSpecifiedTests --tests ${classes} --wait 10 --verbose
+                            sf project deploy start --target-org andreaflorio88@yahoo.it.new --manifest ${manifestPath} --test-level RunSpecifiedTests ${classes} --wait 10 --verbose
                             """
                         } else {
                             bat """
