@@ -7,7 +7,6 @@ pipeline {
         SF_ENV = "${params['Ambiente di destinazione']}"
         SF_VALIDATION = "${params['Solo validazione']}"
         PACKAGE = "${params['Package da utilizzare']}"
-        TEST_CLASS = "${params['Classi di test da eseguire (opz.)']}"
         TESTS = "AccountTriggerHandlerTest"
     }
     stages {
@@ -35,17 +34,12 @@ pipeline {
                         def manifestPath = "manifest/${env.PACKAGE}"
                         def environment = "${env.SF_ENV}"
                         def validation = "${env.SF_VALIDATION}"
-                        def classes = "${env.TEST_CLASS}"
-
-                        if(classes == null) {
-                            classes = "${env.TESTS}"
-                        }
+                        def classes = "${env.TESTS}"
 
                         echo "${SF_ENV}"
                         echo "${PACKAGE}"
                         echo "${SF_VALIDATION}"
                         echo "${TESTS}"
-                        echo "${TEST_CLASS}"
                         
                         bat 'echo "Path to JWT_KEY: %JWT_KEY%"'
                         bat """
