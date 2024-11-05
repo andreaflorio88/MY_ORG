@@ -1,5 +1,6 @@
-trigger AccountsTrigger on Account (after insert, after update, before insert, before update) {
-
-    fflib_SObjectDomain.triggerHandler(Accounts.class);    
+trigger AccountTrigger on Account (after insert) {
+    
+    if(Trigger.isInsert)
+        AccountTriggerHandler.handleAfterInsert(Trigger.new);
     
 }
