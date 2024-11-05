@@ -3,17 +3,21 @@ pipeline {
     tools {
         nodejs '18.14.2'
     }
+    environment {
+        SF_ENV = "${params['Ambiente di destinazione']}"
+        PACKAGE = "${params['Package da utilizzare']}"
+    }
     stages {
         stage('Check SFDX Installation') {
             steps {
                 bat 'sfdx --version'
             }
         }
-        stage('Set Destination Environment') {
+        stage('Authenticate to Destination Environment') {
             steps {
                 script {
-                    def SF_ENV = params['Ambiente di destinazione']
-                    echo "Selected destination environment: ${SF_ENV}"
+                    echo "${SF_ENV}"
+                    echo "${PACKAGE}"
                 }
             }
         }
