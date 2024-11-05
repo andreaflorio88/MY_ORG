@@ -6,8 +6,9 @@ pipeline {
     environment {
         SF_ENV = "${params['Ambiente di destinazione']}"
         SF_VALIDATION = "${params['Solo validazione']}"
+        SF_DEPLOY = "${params['Deploy con test']}"
         PACKAGE = "${params['Package da utilizzare']}"
-        TESTS = "AccountTriggerHandlerTest RiportafogliazioneTest," + 
+        TESTS = "AccountTriggerHandlerTest," + 
                 "RiportafogliazioneTest" 
     }
     stages {
@@ -36,6 +37,7 @@ pipeline {
                         def environment = "${env.SF_ENV}"
                         def validation = "${env.SF_VALIDATION}"
                         def classes = "${env.TESTS}"
+                        def deploy = "${env.SF_DEPLOY}"
 
                         echo "${SF_ENV}"
                         echo "${PACKAGE}"
@@ -50,11 +52,17 @@ pipeline {
                         bat """
                         sfdx force:auth:jwt:grant --client-id 3MVG98Gq2O8Po4Zm6Dx8POjKJh1uGBbGl9QeBG7vEJDEl4JFgmOJJTDpXl3Lx8ksQpmDDsUt54xnXI_xBCsXk --jwt-key-file "%JWT_KEY%" --username andreaflorio88@yahoo.it.new --instance-url https://login.salesforce.com --set-default
                         """
-                        
-                        if(validation == 'true') {
+
+                        if(deploy == 'true') {
+                            echo "Running deploy with test class..."
+                            bat """
+                            sf project deploy start --target-org andreaflorio88@yahoo.it.new --manifest ${manifestPath} --test-level RunSpecifiedTests ${classes}
+                            """
+                        }
+                        else if(validation == 'true') {
                             echo "Running validation..."
                             bat """
-                            sf project deploy start --target-org andreaflorio88@yahoo.it.new --manifest ${manifestPath} --test-level RunSpecifiedTests ${classes} --wait 10 --verbose
+                            sf project deploy start --target-org andreaflorio88@yahoo.it.new --manifest ${manifestPath} --test-level RunSpecifiedTests ${classes}
                             """
                         } else {
                             bat """
