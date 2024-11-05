@@ -40,15 +40,15 @@ pipeline {
                         def deploy = "${env.SF_DEPLOY}"
 
                         echo 'SF_ENV: ' + "${SF_ENV}"
-                        echo "${PACKAGE}"
-                        echo "${SF_VALIDATION}"
-                        echo "${TESTS}"
+                        echo 'PACKAGE: ' + "${PACKAGE}"
+                        echo 'SF_VALIDATION: ' + "${SF_VALIDATION}"
+                        echo 'TESTS: ' + "${TESTS}"
 
                         def classesArray = classes.split(',').collect { it.trim() }
                         classes = classesArray.collect { "--tests " + it }.join(' ')
                         echo "${classes}"
                         
-                        bat 'echo "Path to JWT_KEY: %JWT_KEY%"'
+                        echo "Running authentication..."
                         bat """
                         sfdx force:auth:jwt:grant --client-id 3MVG98Gq2O8Po4Zm6Dx8POjKJh1uGBbGl9QeBG7vEJDEl4JFgmOJJTDpXl3Lx8ksQpmDDsUt54xnXI_xBCsXk --jwt-key-file "%JWT_KEY%" --username andreaflorio88@yahoo.it.new --instance-url https://login.salesforce.com --set-default
                         """
@@ -65,6 +65,7 @@ pipeline {
                             sf project deploy start --target-org andreaflorio88@yahoo.it.new --manifest ${manifestPath} --test-level RunSpecifiedTests ${classes}
                             """
                         } else {
+                            echo "Running deploy without test class..."
                             bat """
                             sf project deploy start --target-org andreaflorio88@yahoo.it.new --manifest ${manifestPath} --wait 10 --verbose
                             """
