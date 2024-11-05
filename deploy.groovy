@@ -34,9 +34,10 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
+                    
                     withCredentials([file(credentialsId: 'SERVER_KEY', variable: 'JWT_KEY')]) {
     
-                        def manifestPath = "manifest/${env.SF_ENV}"
+                        def manifestPath = "manifest/${env.PACKAGE}"
                         
                         bat 'echo "Path to JWT_KEY: %JWT_KEY%"'
                         bat """
