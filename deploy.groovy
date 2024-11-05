@@ -39,7 +39,7 @@ pipeline {
                         def classes = "${env.TESTS}"
                         def deploy = "${env.SF_DEPLOY}"
 
-                        echo "${SF_ENV}"
+                        echo 'SF_ENV: ' + "${SF_ENV}"
                         echo "${PACKAGE}"
                         echo "${SF_VALIDATION}"
                         echo "${TESTS}"
