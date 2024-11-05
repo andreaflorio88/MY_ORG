@@ -5,6 +5,7 @@ pipeline {
     }
     environment {
         SF_ENV = "${params['Ambiente di destinazione']}"
+        SF_VALIDATION = "${params['Solo validazione']}"
         PACKAGE = "${params['Package da utilizzare']}"
     }
     stages {
@@ -25,9 +26,9 @@ pipeline {
             steps {
                 withCredentials([file(credentialsId: 'SERVER_KEY', variable: 'JWT_KEY')]) {
                     bat 'echo "Path to JWT_KEY: %JWT_KEY%"'
-                    bat '''
+                    bat """
                     sfdx force:auth:jwt:grant --client-id 3MVG98Gq2O8Po4Zm6Dx8POjKJh1uGBbGl9QeBG7vEJDEl4JFgmOJJTDpXl3Lx8ksQpmDDsUt54xnXI_xBCsXk --jwt-key-file "%JWT_KEY%" --username andreaflorio88@yahoo.it.new --instance-url https://login.salesforce.com --set-default-dev-hub
-                    '''
+                    """
                 }
             }
         }
@@ -38,6 +39,10 @@ pipeline {
                     withCredentials([file(credentialsId: 'SERVER_KEY', variable: 'JWT_KEY')]) {
     
                         def manifestPath = "manifest/${env.PACKAGE}"
+                        def validation = "manifest/${env.SF_VALIDATION}"
+
+                        echo 'MANIFEST: ' "${manifestPath}"
+                        echi 'VALIDATION: ' "${validation}"
                         
                         bat 'echo "Path to JWT_KEY: %JWT_KEY%"'
                         bat """
