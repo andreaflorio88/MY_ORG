@@ -49,7 +49,7 @@ pipeline {
                         if(validation == 'true') {
                             echo "Running validation..."
                             bat """
-                            sf project deploy start --target-org andreaflorio88@yahoo.it.new --manifest ${manifestPath} --test-level RunSpecifiedTests --tests ${classes} --check-only --wait 10 --verbose
+                            sf project deploy start --target-org andreaflorio88@yahoo.it.new --manifest ${manifestPath} --test-level RunSpecifiedTests --tests ${classes} --wait 10 --verbose
                             """
                         } else {
                             bat """
