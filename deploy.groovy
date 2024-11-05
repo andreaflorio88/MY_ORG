@@ -54,7 +54,7 @@ pipeline {
                             
                             echo "Running validation..."
                             bat """
-                            sf project deploy start --target-org andreaflorio88@yahoo.it.new --test-level RunSpecifiedTests --tests ${classes}
+                            sf project deploy start --target-org andreaflorio88@yahoo.it.new --manifest ${manifestPath} --test-level RunSpecifiedTests --tests ${classes}
                             """
                         } else {
                             bat """
