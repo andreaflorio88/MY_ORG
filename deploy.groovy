@@ -38,12 +38,17 @@ pipeline {
                         def environment = "${env.SF_ENV}"
                         def validation = "${env.SF_VALIDATION}"
                         def classes = "${env.TESTS}"
+                        def test_classes = "${env.TEST_CLASSES}"
                         def deploy = "${env.SF_DEPLOY}"
 
                         echo 'SF_ENV: ' + "${SF_ENV}"
                         echo 'PACKAGE: ' + "${PACKAGE}"
                         echo 'SF_VALIDATION: ' + "${SF_VALIDATION}"
                         echo 'TEST_CLASSES: ' + "${TEST_CLASSES}"
+
+                        if(test_classes != null) {
+                            classes = test_classes
+                        }
 
                         def classesArray = classes.split(',').collect { it.trim() }
                         classes = classesArray.collect { "--tests " + it }.join(' ')
