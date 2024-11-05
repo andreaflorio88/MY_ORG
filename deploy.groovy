@@ -48,7 +48,7 @@ pipeline {
                         
                         if(validation == 'true') {
                             bat """
-                            sf project deploy start --target-org andreaflorio88@yahoo.it.new --manifest ${manifestPath} --testlevel RunSpecifiedTests --runtests ${classes} --wait 10 --verbose
+                            sf apex test run --tests "${classes}" --wait 10 --verbose
                             """
                         } else {
                             bat """
