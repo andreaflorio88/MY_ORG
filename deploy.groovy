@@ -11,6 +11,9 @@ pipeline {
         }
         stage('Salesforce Authentication') {
             steps {
+                def SF_ENV = params['Ambiente di destinazione']
+                echo "Authenticating to destination environment: ${SF_ENV}"
+                
                 withCredentials([file(credentialsId: 'SERVER_KEY', variable: 'JWT_KEY')]) {
                     bat 'echo "Path to JWT_KEY: %JWT_KEY%"'
                     bat '''
