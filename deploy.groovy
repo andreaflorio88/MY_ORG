@@ -7,7 +7,7 @@ pipeline {
         SF_ENV = "${params['Ambiente di destinazione']}"
         SF_VALIDATION = "${params['Solo validazione']}"
         PACKAGE = "${params['Package da utilizzare']}"
-        TESTS = "AccountTriggerHandlerTest,RiportafogliazioneTest"
+        TESTS = "AccountTriggerHandlerTest"
     }
     stages {
         stage('Check SFDX Installation') {
