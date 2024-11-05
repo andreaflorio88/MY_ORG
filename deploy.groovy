@@ -7,6 +7,8 @@ pipeline {
         SF_ENV = "${params['Ambiente di destinazione']}"
         SF_VALIDATION = "${params['Solo validazione']}"
         PACKAGE = "${params['Package da utilizzare']}"
+        TEST_CLASS = "$params['Classi di test da eseguire (opz.)']"
+        TESTS = "AccountTriggerHandlerTest"
     }
     stages {
         stage('Check SFDX Installation') {
@@ -33,24 +35,31 @@ pipeline {
                         def manifestPath = "manifest/${env.PACKAGE}"
                         def environment = "${env.SF_ENV}"
                         def validation = "${env.SF_VALIDATION}"
+                        def classes = "${env.TEST_CLASS}"
 
-                        def check = 'start';
+                        if(classes == null) {
+                            classes = "${env.TESTS}"
+                        }
 
                         echo "${SF_ENV}"
                         echo "${PACKAGE}"
                         echo "${SF_VALIDATION}"
+                        echo "${TESTS}"
+                        echo "${TEST_CLASS}"
                         
                         bat 'echo "Path to JWT_KEY: %JWT_KEY%"'
                         bat """
                         sfdx force:auth:jwt:grant --client-id 3MVG98Gq2O8Po4Zm6Dx8POjKJh1uGBbGl9QeBG7vEJDEl4JFgmOJJTDpXl3Lx8ksQpmDDsUt54xnXI_xBCsXk --jwt-key-file "%JWT_KEY%" --username andreaflorio88@yahoo.it.new --instance-url https://login.salesforce.com --set-default
                         """
                         if(validation) {
-                            check = 'validate'
+                            bat """
+                            sf project deploy validate --target-org andreaflorio88@yahoo.it.new --manifest ${manifestPath} --testlevel RunSpecifiedTests --runtests ${TESTS} --wait 10 --verbose
+                            """
+                        } else {
+                            bat """
+                            sf project deploy start --target-org andreaflorio88@yahoo.it.new --manifest ${manifestPath} --wait 10 --verbose
+                            """
                         }
-                        
-                        bat """
-                        sf project deploy ${check} --target-org andreaflorio88@yahoo.it.new --manifest ${manifestPath} --wait 10 --verbose
-                        """
                     }
                 }
             }
