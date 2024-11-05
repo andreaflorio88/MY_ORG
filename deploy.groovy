@@ -48,7 +48,7 @@ pipeline {
                         
                         if(validation == 'true') {
                             bat """
-                            sf apex test run --tests "${classes}" --wait 10 --verbose
+                            sf apex test run --tests "${classes}" --wait 10 --json
                             """
                         } else {
                             bat """
