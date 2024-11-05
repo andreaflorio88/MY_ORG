@@ -83,29 +83,33 @@ pipeline {
     }
 
     post {
-
+    always {
+        echo 'Pipeline execution finished.'
+    }
+    
+    success {
         script {
             def validation = "${env.SF_VALIDATION}"
             def deploy = "${env.SF_DEPLOY}"
             def request
-    
-            if(deploy == true) {
+
+            // Verifica se deploy o validation sono attivi
+            if (deploy == 'true') {
                 request = 'Deployment with test'
-            } else if(validation == 'true') {
+            } else if (validation == 'true') {
                 request = 'Validation'
             } else {
                 request = 'Deployment without test'
             }
-            
-            always {
-                echo 'Pipeline execution finished.'
-            }
-            success {            
-                echo "${manifestPath} was successful!"
-            }
-            failure {
-                echo "${manifestPath} failed. Check the logs for details."
-            }
+
+            echo "Request type: ${request}"
+            echo "${manifestPath} was successful!"
+        }
+    }
+    
+    failure {
+        script {
+            echo "${manifestPath} failed. Check the logs for details."
         }
     }
 }
