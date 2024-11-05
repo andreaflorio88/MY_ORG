@@ -40,7 +40,7 @@ pipeline {
                     '''
 
                     bat '''
-                    sf project deploy start --target-org andreaflorio88@yahoo.it.new --manifest ${SF_ENV} --wait 10 --verbose
+                    sf project deploy start --target-org andreaflorio88@yahoo.it.new --manifest manifest/${SF_ENV} --wait 10 --verbose
                     '''
                 }
             }
