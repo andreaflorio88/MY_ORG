@@ -42,11 +42,10 @@ pipeline {
                         echo 'SF_ENV: ' + "${SF_ENV}"
                         echo 'PACKAGE: ' + "${PACKAGE}"
                         echo 'SF_VALIDATION: ' + "${SF_VALIDATION}"
-                        echo 'TESTS: ' + "${TESTS}"
 
                         def classesArray = classes.split(',').collect { it.trim() }
                         classes = classesArray.collect { "--tests " + it }.join(' ')
-                        echo "${classes}"
+                        echo 'TESTS: ' + "${classes}"
                         
                         echo "Running authentication..."
                         bat """
@@ -62,7 +61,7 @@ pipeline {
                         else if(validation == 'true') {
                             echo "Running validation..."
                             bat """
-                            sf project deploy start --target-org andreaflorio88@yahoo.it.new --manifest ${manifestPath} --test-level RunSpecifiedTests ${classes}
+                            sf project deploy validate --target-org andreaflorio88@yahoo.it.new --manifest ${manifestPath} --test-level RunSpecifiedTests ${classes} --wait 10 --verbose --json
                             """
                         } else {
                             echo "Running deploy without test class..."
