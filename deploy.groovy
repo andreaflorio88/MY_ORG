@@ -4,6 +4,7 @@ pipeline {
         nodejs '18.14.2'
     }
     environment {
+        REQUEST = 'Deploy without test class'
         SF_ENV = "${params['Ambiente di destinazione']}"
         SF_VALIDATION = "${params['Solo validazione']}"
         SF_DEPLOY = "${params['Deploy con test']}"
@@ -60,12 +61,14 @@ pipeline {
                         """
 
                         if(deploy == 'true') {
+                            REQUEST = 'Deployment with test class'
                             echo "Running deploy with test class..."
                             bat """
                             sf project deploy start --target-org andreaflorio88@yahoo.it.new --manifest ${manifestPath} --test-level RunSpecifiedTests ${classes}
                             """
                         }
                         else if(validation == 'true') {
+                            REQUEST = 'Validation'
                             echo "Running validation..."
                             bat """
                             sf project deploy validate --target-org andreaflorio88@yahoo.it.new --manifest ${manifestPath} --test-level RunSpecifiedTests ${classes} --wait 10 --verbose --json
@@ -86,31 +89,11 @@ pipeline {
         always {
             echo 'Pipeline execution finished.'
         }
-        
         success {
-            script {
-                def validation = "${env.SF_VALIDATION}"
-                def deploy = "${env.SF_DEPLOY}"
-                def request
-    
-                // Verifica se deploy o validation sono attivi
-                if (deploy == 'true') {
-                    request = 'Deployment with test'
-                } else if (validation == 'true') {
-                    request = 'Validation'
-                } else {
-                    request = 'Deployment without test'
-                }
-    
-                echo "Request type: ${request}"
-                echo "${manifestPath} was successful!"
-            }
+            echo "${REQUEST} was successful!"
         }
-        
         failure {
-            script {
-                echo "${manifestPath} failed. Check the logs for details."
-            }
+            echo "${REQUEST} failed. Check the logs for details."
         }
     }
 }
