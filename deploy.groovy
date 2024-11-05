@@ -54,7 +54,7 @@ pipeline {
                             
                             echo "Running validation..."
                             bat """
-                            sf project deploy validate --target-org andreaflorio88@yahoo.it.new --manifest ${manifestPath}  --wait 10 --verbose
+                            sf project deploy start --target-org andreaflorio88@yahoo.it.new --metadata ApexClass --test-level RunSpecifiedTests --tests ${classes}
                             """
                         } else {
                             bat """
