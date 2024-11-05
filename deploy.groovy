@@ -8,6 +8,7 @@ pipeline {
         SF_VALIDATION = "${params['Solo validazione']}"
         SF_DEPLOY = "${params['Deploy con test']}"
         PACKAGE = "${params['Package da utilizzare']}"
+        TEST_CLASSES = "${params['Classi di test da eseguire (opz.)']}"
         TESTS = "AccountTriggerHandlerTest," + 
                 "RiportafogliazioneTest" 
     }
@@ -42,6 +43,7 @@ pipeline {
                         echo 'SF_ENV: ' + "${SF_ENV}"
                         echo 'PACKAGE: ' + "${PACKAGE}"
                         echo 'SF_VALIDATION: ' + "${SF_VALIDATION}"
+                        echo 'TEST_CLASSES: ' + "${TEST_CLASSES}"
 
                         def classesArray = classes.split(',').collect { it.trim() }
                         classes = classesArray.collect { "--tests " + it }.join(' ')
