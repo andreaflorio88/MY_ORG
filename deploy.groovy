@@ -7,8 +7,8 @@ pipeline {
         SF_ENV = "${params['Ambiente di destinazione']}"
         SF_VALIDATION = "${params['Solo validazione']}"
         PACKAGE = "${params['Package da utilizzare']}"
-        TESTS = "--tests AccountTriggerHandlerTest RiportafogliazioneTest" + 
-                "--tests RiportafogliazioneTest" 
+        TESTS = "AccountTriggerHandlerTest RiportafogliazioneTest," + 
+                "RiportafogliazioneTest" 
     }
     stages {
         stage('Check SFDX Installation') {
@@ -41,6 +41,10 @@ pipeline {
                         echo "${PACKAGE}"
                         echo "${SF_VALIDATION}"
                         echo "${TESTS}"
+
+                        def classesArray = classes.split(',').collect { it.trim() }
+                        classes = classesArray.collect { "--tests " + it }.join(' ')
+                        echo "${classes}"
                         
                         bat 'echo "Path to JWT_KEY: %JWT_KEY%"'
                         bat """
@@ -50,7 +54,7 @@ pipeline {
                         if(validation == 'true') {
                             echo "Running validation..."
                             bat """
-                            sf project deploy start --target-org andreaflorio88@yahoo.it.new --manifest ${manifestPath} --test-level RunSpecifiedTests ${classes}
+                            sf project deploy start --target-org andreaflorio88@yahoo.it.new --manifest ${manifestPath} --test-level RunSpecifiedTests ${classes} --wait 10 --verbose
                             """
                         } else {
                             bat """
