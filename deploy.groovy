@@ -47,14 +47,9 @@ pipeline {
                         """
                         
                         if(validation == 'true') {
-                            echo "Running specified tests..."
-                            bat """
-                                sf apex test run --tests "${env.TESTS}" --wait 10 --json
-                            """
-                            
                             echo "Running validation..."
                             bat """
-                            sf project deploy start --target-org andreaflorio88@yahoo.it.new --manifest ${manifestPath} --test-level RunSpecifiedTests --tests ${classes}
+                            sf project deploy start --target-org andreaflorio88@yahoo.it.new --manifest ${manifestPath} --test-level RunSpecifiedTests --tests ${classes} --check-only --wait 10 --verbose
                             """
                         } else {
                             bat """
