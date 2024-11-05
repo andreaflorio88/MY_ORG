@@ -7,7 +7,7 @@ pipeline {
         SF_ENV = "${params['Ambiente di destinazione']}"
         SF_VALIDATION = "${params['Solo validazione']}"
         PACKAGE = "${params['Package da utilizzare']}"
-        TEST_CLASS = "$params['Classi di test da eseguire (opz.)']"
+        TEST_CLASS = "${params['Classi di test da eseguire (opz.)']}"
         TESTS = "AccountTriggerHandlerTest"
     }
     stages {
