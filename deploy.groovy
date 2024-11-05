@@ -83,15 +83,26 @@ pipeline {
     }
 
     post {
+        def validation = "${env.SF_VALIDATION}"
+        def deploy = "${env.SF_DEPLOY}"
+        def request
+
+        if(deploy == true) {
+            request = 'Deployment with test'
+        } else if(validation == 'true') {
+            request = 'Validation'
+        } else {
+            request = 'Deployment without test'
+        }
+        
         always {
-            // Cleanup or notification steps can be added here
             echo 'Pipeline execution finished.'
         }
-        success {
-            echo 'Deployment was successful!'
+        success {            
+            echo "${manifestPath} was successful!"
         }
         failure {
-            echo 'Deployment failed. Check the logs for details.'
+            echo "${manifestPath} failed. Check the logs for details."
         }
     }
 }
