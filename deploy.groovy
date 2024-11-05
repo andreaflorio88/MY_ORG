@@ -14,14 +14,6 @@ pipeline {
                 bat 'sfdx --version'
             }
         }
-        stage('Authenticate to Destination Environment') {
-            steps {
-                script {
-                    echo "${SF_ENV}"
-                    echo "${PACKAGE}"
-                }
-            }
-        }
         stage('Salesforce Authentication') {
             steps {
                 withCredentials([file(credentialsId: 'SERVER_KEY', variable: 'JWT_KEY')]) {
@@ -37,12 +29,14 @@ pipeline {
                 script {
                     
                     withCredentials([file(credentialsId: 'SERVER_KEY', variable: 'JWT_KEY')]) {
-    
-                        def manifestPath = "manifest/${env.PACKAGE}"
-                        def validation = "manifest/${env.SF_VALIDATION}"
 
-                        echo 'MANIFEST: ' "${manifestPath}"
-                        echi 'VALIDATION: ' "${validation}"
+                        def manifestPath = "manifest/${env.PACKAGE}"
+                        def environment = "${env.SF_ENV}"
+                        def validation = "${env.SF_VALIDATION}"
+
+                        echo "${SF_ENV}"
+                        echo "${PACKAGE}"
+                        echo "${SF_VALIDATION}"
                         
                         bat 'echo "Path to JWT_KEY: %JWT_KEY%"'
                         bat """
