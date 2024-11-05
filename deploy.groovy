@@ -53,7 +53,7 @@ pipeline {
                         """
                         if(validation) {
                             bat """
-                            sf project deploy validate --target-org andreaflorio88@yahoo.it.new --manifest ${manifestPath} --tests ${TEST_CLASS} --wait 10 --verbose
+                            sf project deploy validate --target-org andreaflorio88@yahoo.it.new --manifest ${manifestPath} --tests ${classes} --wait 10 --verbose
                             """
                         } else {
                             bat """
