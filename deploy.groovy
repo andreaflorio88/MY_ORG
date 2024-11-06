@@ -1,8 +1,5 @@
 pipeline {
     agent any
-    options {
-        skipDefaultCheckout(true)
-    }
     tools {
         nodejs '18.14.2'
     }
