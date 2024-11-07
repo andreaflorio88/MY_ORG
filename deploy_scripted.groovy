@@ -24,7 +24,7 @@ node {
     }
 
     stage('Deploy') {
-        dir('sfdx-project.json') {
+        dir('/sfdx-project.json') {
             withCredentials([file(credentialsId: 'SERVER_KEY', variable: 'JWT_KEY')]) {
                 def manifestPath = "manifest/${PACKAGE}"
                 def environment = "${SF_ENV}"
