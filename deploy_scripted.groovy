@@ -1,5 +1,3 @@
-import groovy.json.JsonSlurperClassic
-
 node {
     // Definizione delle variabili
     def SF_DEPLOY = "${params['Deploy con test']}"
@@ -12,14 +10,6 @@ node {
                 "RiportafogliazioneTest"
     def classes
 
-    // Configura NodeJS
-    def nodeHome = tool name: '18.14.2', type: 'NodeJS'
-    env.PATH = "${nodeHome}/bin:${env.PATH}"
-
-    stage('Check Node Version') {
-        sh 'node -v'  // Verifica la versione di NodeJS installata
-    }
-    
     stage('Check SFDX Installation') {
         bat 'sfdx --version'
     }
@@ -64,18 +54,18 @@ node {
                 REQUEST = 'Deployment with test class'
                 echo "Running deploy with test class..."
                 bat """
-                sf project deploy start --target-org andreaflorio88@yahoo.it.new --manifest ${manifestPath} --test-level RunSpecifiedTests ${classes} --wait 10 --verbose
+                sfdx config:set org-metadata-rest-deploy=true; sf project deploy start --target-org andreaflorio88@yahoo.it.new --manifest ${manifestPath} --test-level RunSpecifiedTests ${classes} --wait 10 --verbose
                 """
             } else if (validation == 'true') {
                 REQUEST = 'Validation'
                 echo "Running validation..."
                 bat """
-                sf project deploy validate --target-org andreaflorio88@yahoo.it.new --manifest ${manifestPath} --test-level RunSpecifiedTests ${classes} --wait 10 --verbose --json
+                sfdx config:set org-metadata-rest-deploy=true; sf project deploy validate --target-org andreaflorio88@yahoo.it.new --manifest ${manifestPath} --test-level RunSpecifiedTests ${classes} --wait 10 --verbose --json
                 """
             } else {
                 echo "Running deploy without test class..."
                 bat """
-                sf project deploy start --target-org andreaflorio88@yahoo.it.new --manifest ${manifestPath} --wait 10 --verbose
+                sfdx config:set org-metadata-rest-deploy=true; sf project deploy start --target-org andreaflorio88@yahoo.it.new --manifest ${manifestPath} --wait 10 --verbose
                 """
             }
         }
