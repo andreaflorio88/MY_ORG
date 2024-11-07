@@ -1,3 +1,5 @@
+import groovy.json.JsonSlurperClassic
+
 node {
     // Definizione delle variabili
     def SF_DEPLOY = "${params['Deploy con test']}"
