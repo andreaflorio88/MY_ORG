@@ -4,6 +4,7 @@ node {
     def PACKAGE = "${params['Package da utilizzare']}"
     def SF_VALIDATION = "${params['Solo validazione']}"
     def SF_ENV = "${params['Ambiente di destinazione']}"
+    def CLIENTID = "3MVG98Gq2O8Po4Zm6Dx8POjKJh1uGBbGl9QeBG7vEJDEl4JFgmOJJTDpXl3Lx8ksQpmDDsUt54xnXI_xBCsXk"
     def REQUEST = 'Deploy without test class'
     def TESTS = "AccountTriggerHandlerTest," + 
                 "RiportafogliazioneTest"
@@ -17,7 +18,7 @@ node {
         withCredentials([file(credentialsId: 'SERVER_KEY', variable: 'JWT_KEY')]) {
             echo "Running authentication..."
             bat """
-            sfdx force:auth:jwt:grant --client-id CLIENTID --jwt-key-file "%JWT_KEY%" --username andreaflorio88@yahoo.it.new --instance-url https://login.salesforce.com --set-default-dev-hub
+            sfdx force:auth:jwt:grant --client-id ${CLIENTID} --jwt-key-file "%JWT_KEY%" --username andreaflorio88@yahoo.it.new --instance-url https://login.salesforce.com --set-default-dev-hub
             """
         }
     }
@@ -46,7 +47,7 @@ node {
 
             echo "Running authentication..."
             bat """
-            sfdx force:auth:jwt:grant --client-id CLIENTID --jwt-key-file "%JWT_KEY%" --username andreaflorio88@yahoo.it.new --instance-url https://login.salesforce.com --set-default
+            sfdx force:auth:jwt:grant --client-id ${CLIENTID} --jwt-key-file "%JWT_KEY%" --username andreaflorio88@yahoo.it.new --instance-url https://login.salesforce.com --set-default
             """
 
             if (deploy == 'true') {
