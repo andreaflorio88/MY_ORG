@@ -12,6 +12,14 @@ node {
                 "RiportafogliazioneTest"
     def classes
 
+    // Configura NodeJS
+    def nodeHome = tool name: '18.14.2', type: 'NodeJS'
+    env.PATH = "${nodeHome}/bin:${env.PATH}"
+
+    stage('Check Node Version') {
+        sh 'node -v'  // Verifica la versione di NodeJS installata
+    }
+    
     stage('Check SFDX Installation') {
         bat 'sfdx --version'
     }
