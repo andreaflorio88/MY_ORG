@@ -7,7 +7,7 @@ node {
     def PACKAGE = params['Package da utilizzare']
 
     // -------------------------------------------------------------------------
-    // Push to PARTIAL5
+    // Push to PAR5
     // -------------------------------------------------------------------------
 
     stage('Push to PARTIAL5') {
