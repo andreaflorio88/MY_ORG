@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    tools {
+        nodejs '18.14.2'
+    }
     environment {
         SF_ENV = "${params['Ambiente di destinazione']}"
         SF_VALIDATION = "${params['Solo validazione']}"
