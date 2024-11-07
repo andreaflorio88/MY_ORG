@@ -9,9 +9,6 @@ node {
                 "RiportafogliazioneTest"
     def classes
 
-    // Imposta NodeJS
-    tool name: '18.14.2', type: 'NodeJS'
-
     stage('Check SFDX Installation') {
         bat 'sfdx --version'
     }
