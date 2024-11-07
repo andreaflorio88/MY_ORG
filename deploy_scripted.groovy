@@ -14,6 +14,12 @@ node {
         bat 'sfdx --version'
     }
 
+    stage('Check Project File') {
+        sh 'ls -la'  // Verifica i file nella directory corrente (Linux/macOS)
+        // oppure
+        bat 'dir'    // Verifica i file nella directory corrente (Windows)
+    }
+
     stage('Salesforce Authentication') {
         withCredentials([file(credentialsId: 'SERVER_KEY', variable: 'JWT_KEY')]) {
             echo "Running authentication..."
