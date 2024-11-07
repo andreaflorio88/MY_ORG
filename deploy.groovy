@@ -1,16 +1,19 @@
-pipeline { 
+pipeline {
     agent any
     tools {
         nodejs '18.14.2'
     }
     environment {
-        SF_ENV = "${params['Ambiente di destinazione']}"
-        SF_VALIDATION = "${params['Solo validazione']}"
+
         SF_DEPLOY = "${params['Deploy con test']}"
         PACKAGE = "${params['Package da utilizzare']}"
+        SF_VALIDATION = "${params['Solo validazione']}"
+        SF_ENV = "${params['Ambiente di destinazione']}"
+
         REQUEST = 'Deploy without test class'
         TESTS = "AccountTriggerHandlerTest," + 
-                "RiportafogliazioneTest" 
+                "RiportafogliazioneTest"
+
     }
     stages {
         stage('Check SFDX Installation') {
