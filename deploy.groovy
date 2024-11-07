@@ -1,14 +1,11 @@
 pipeline {
     agent any
-    tools {
-        nodejs '18.14.2'
-    }
     environment {
-        REQUEST = 'Deploy without test class'
         SF_ENV = "${params['Ambiente di destinazione']}"
         SF_VALIDATION = "${params['Solo validazione']}"
         SF_DEPLOY = "${params['Deploy con test']}"
         PACKAGE = "${params['Package da utilizzare']}"
+        REQUEST = 'Deploy without test class'
         TESTS = "AccountTriggerHandlerTest," + 
                 "RiportafogliazioneTest" 
     }
