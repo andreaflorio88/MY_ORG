@@ -14,12 +14,6 @@ node {
         bat 'sfdx --version'
     }
 
-    stage('Check Project File') {
-        sh 'ls -la'  // Verifica i file nella directory corrente (Linux/macOS)
-        // oppure
-        bat 'dir'    // Verifica i file nella directory corrente (Windows)
-    }
-
     stage('Salesforce Authentication') {
         withCredentials([file(credentialsId: 'SERVER_KEY', variable: 'JWT_KEY')]) {
             echo "Running authentication..."
@@ -30,49 +24,51 @@ node {
     }
 
     stage('Deploy') {
-        withCredentials([file(credentialsId: 'SERVER_KEY', variable: 'JWT_KEY')]) {
-            def manifestPath = "manifest/${PACKAGE}"
-            def environment = "${SF_ENV}"
-            def validation = "${SF_VALIDATION}"
-            def deploy = "${SF_DEPLOY}"
+        dir('sfdx-project.json') {
+            withCredentials([file(credentialsId: 'SERVER_KEY', variable: 'JWT_KEY')]) {
+                def manifestPath = "manifest/${PACKAGE}"
+                def environment = "${SF_ENV}"
+                def validation = "${SF_VALIDATION}"
+                def deploy = "${SF_DEPLOY}"
 
-            echo "SF_ENV: ${SF_ENV}"
-            echo "PACKAGE: ${PACKAGE}"
-            echo "SF_VALIDATION: ${SF_VALIDATION}"
+                echo "SF_ENV: ${SF_ENV}"
+                echo "PACKAGE: ${PACKAGE}"
+                echo "SF_VALIDATION: ${SF_VALIDATION}"
 
-            // Gestione delle classi di test
-            if ("${params['Classi di test da eseguire (opz.)']}") {
-                classes = "${params['Classi di test da eseguire (opz.)']}"
-            } else {
-                classes = TESTS
-            }
+                // Gestione delle classi di test
+                if ("${params['Classi di test da eseguire (opz.)']}") {
+                    classes = "${params['Classi di test da eseguire (opz.)']}"
+                } else {
+                    classes = TESTS
+                }
 
-            def classesArray = classes.split(',').collect { it.trim() }
-            classes = classesArray.collect { "--tests " + it }.join(' ')
-            echo "TESTS: ${classes}"
+                def classesArray = classes.split(',').collect { it.trim() }
+                classes = classesArray.collect { "--tests " + it }.join(' ')
+                echo "TESTS: ${classes}"
 
-            echo "Running authentication..."
-            bat """
-            sfdx force:auth:jwt:grant --client-id ${CLIENTID} --jwt-key-file "%JWT_KEY%" --username andreaflorio88@yahoo.it.new --instance-url https://login.salesforce.com --set-default
-            """
-
-            if (deploy == 'true') {
-                REQUEST = 'Deployment with test class'
-                echo "Running deploy with test class..."
+                echo "Running authentication..."
                 bat """
-                sf project deploy start --target-org andreaflorio88@yahoo.it.new --manifest ${manifestPath} --test-level RunSpecifiedTests ${classes} --wait 10 --verbose
+                sfdx force:auth:jwt:grant --client-id ${CLIENTID} --jwt-key-file "%JWT_KEY%" --username andreaflorio88@yahoo.it.new --instance-url https://login.salesforce.com --set-default
                 """
-            } else if (validation == 'true') {
-                REQUEST = 'Validation'
-                echo "Running validation..."
-                bat """
-                sf project deploy validate --target-org andreaflorio88@yahoo.it.new --manifest ${manifestPath} --test-level RunSpecifiedTests ${classes} --wait 10 --verbose --json
-                """
-            } else {
-                echo "Running deploy without test class..."
-                bat """
-                sf project deploy start --target-org andreaflorio88@yahoo.it.new --manifest ${manifestPath} --wait 10 --verbose
-                """
+
+                if (deploy == 'true') {
+                    REQUEST = 'Deployment with test class'
+                    echo "Running deploy with test class..."
+                    bat """
+                    sf project deploy start --target-org andreaflorio88@yahoo.it.new --manifest ${manifestPath} --test-level RunSpecifiedTests ${classes} --wait 10 --verbose
+                    """
+                } else if (validation == 'true') {
+                    REQUEST = 'Validation'
+                    echo "Running validation..."
+                    bat """
+                    sf project deploy validate --target-org andreaflorio88@yahoo.it.new --manifest ${manifestPath} --test-level RunSpecifiedTests ${classes} --wait 10 --verbose --json
+                    """
+                } else {
+                    echo "Running deploy without test class..."
+                    bat """
+                    sf project deploy start --target-org andreaflorio88@yahoo.it.new --manifest ${manifestPath} --wait 10 --verbose
+                    """
+                }
             }
         }
     }
