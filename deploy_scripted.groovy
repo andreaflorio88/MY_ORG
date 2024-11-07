@@ -54,18 +54,18 @@ node {
                 REQUEST = 'Deployment with test class'
                 echo "Running deploy with test class..."
                 bat """
-                sfdx config:set org-metadata-rest-deploy=true; sf project deploy start --target-org andreaflorio88@yahoo.it.new --manifest ${manifestPath} --test-level RunSpecifiedTests ${classes} --wait 10 --verbose
+                sf project deploy start --target-org andreaflorio88@yahoo.it.new --manifest ${manifestPath} --test-level RunSpecifiedTests ${classes} --wait 10 --verbose
                 """
             } else if (validation == 'true') {
                 REQUEST = 'Validation'
                 echo "Running validation..."
                 bat """
-                sfdx config:set org-metadata-rest-deploy=true; sf project deploy validate --target-org andreaflorio88@yahoo.it.new --manifest ${manifestPath} --test-level RunSpecifiedTests ${classes} --wait 10 --verbose --json
+                sf project deploy validate --target-org andreaflorio88@yahoo.it.new --manifest ${manifestPath} --test-level RunSpecifiedTests ${classes} --wait 10 --verbose --json
                 """
             } else {
                 echo "Running deploy without test class..."
                 bat """
-                sfdx config:set org-metadata-rest-deploy=true; sf project deploy start --target-org andreaflorio88@yahoo.it.new --manifest ${manifestPath} --wait 10 --verbose
+                sf project deploy start --target-org andreaflorio88@yahoo.it.new --manifest ${manifestPath} --wait 10 --verbose
                 """
             }
         }
