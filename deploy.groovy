@@ -5,10 +5,10 @@ pipeline {
     }
     environment {
 
-        SF_DEPLOY = "${params['Deploy con test']}"
-        PACKAGE = "${params['Package da utilizzare']}"
-        SF_VALIDATION = "${params['Solo validazione']}"
-        SF_ENV = "${params['Ambiente di destinazione']}"
+        SF_DEPLOY = params.Deploy_con_test
+        PACKAGE = params.Package_da_utilizzare
+        SF_VALIDATION = params.Solo_validazione
+        SF_ENV = params.Ambiente_di_destinazione
 
         REQUEST = 'Deploy without test class'
         TESTS = "AccountTriggerHandlerTest," + 
