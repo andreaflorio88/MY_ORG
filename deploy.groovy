@@ -52,7 +52,7 @@ pipeline {
                         }
 
                         def classesArray = TESTS.split(',').collect { it.trim() }
-                        TESTS = classesArray.join(' ')
+                        classes = classesArray.join(' ')
                         echo 'TESTS: ' + "${classes}"
                         
                         echo "Running authentication..."
