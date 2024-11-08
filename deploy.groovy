@@ -18,7 +18,7 @@ pipeline {
     stages {
         stage('Check SFDX Installation') {
             steps {
-                bat 'sfdx --version'
+                bat 'sf --version'
             }
         }
         stage('Salesforce Authentication') {
@@ -26,7 +26,7 @@ pipeline {
                 withCredentials([file(credentialsId: 'SERVER_KEY', variable: 'JWT_KEY')]) {
                     echo "Running authentication..."
                     bat """
-                    sfdx force:auth:jwt:grant --client-id 3MVG98Gq2O8Po4Zm6Dx8POjKJh1uGBbGl9QeBG7vEJDEl4JFgmOJJTDpXl3Lx8ksQpmDDsUt54xnXI_xBCsXk --jwt-key-file "%JWT_KEY%" --username andreaflorio88@yahoo.it.new --instance-url https://login.salesforce.com --set-default-dev-hub
+                    sf org login jwt --client-id 3MVG98Gq2O8Po4Zm6Dx8POjKJh1uGBbGl9QeBG7vEJDEl4JFgmOJJTDpXl3Lx8ksQpmDDsUt54xnXI_xBCsXk --jwt-key-file "%JWT_KEY%" --username andreaflorio88@yahoo.it.new --instance-url https://login.salesforce.com --set-default-dev-hub
                     """
                 }
             }
@@ -51,27 +51,27 @@ pipeline {
                             classes = "${params['Classi di test da eseguire (opz.)']}"
                         }
 
-                        def classesArray = classes.split(',').collect { it.trim() }
-                        classes = classesArray.collect { "--tests " + it }.join(' ')
+                        def classesArray = TESTS.split(',').collect { it.trim() }
+                        TESTS = classesArray.join(' ')
                         echo 'TESTS: ' + "${classes}"
                         
                         echo "Running authentication..."
                         bat """
-                        sfdx force:auth:jwt:grant --client-id 3MVG98Gq2O8Po4Zm6Dx8POjKJh1uGBbGl9QeBG7vEJDEl4JFgmOJJTDpXl3Lx8ksQpmDDsUt54xnXI_xBCsXk --jwt-key-file "%JWT_KEY%" --username andreaflorio88@yahoo.it.new --instance-url https://login.salesforce.com --set-default
+                        sf org login jwt --client-id 3MVG98Gq2O8Po4Zm6Dx8POjKJh1uGBbGl9QeBG7vEJDEl4JFgmOJJTDpXl3Lx8ksQpmDDsUt54xnXI_xBCsXk --jwt-key-file "%JWT_KEY%" --username andreaflorio88@yahoo.it.new --instance-url https://login.salesforce.com --set-default
                         """
 
                         if(deploy == 'true') {
                             REQUEST = 'Deployment with test class'
                             echo "Running deploy with test class..."
                             bat """
-                            sf project deploy start --target-org andreaflorio88@yahoo.it.new --manifest ${manifestPath} --test-level RunSpecifiedTests ${classes} --wait 10 --verbose
+                            sf project deploy start --target-org andreaflorio88@yahoo.it.new --manifest ${manifestPath} --test-level RunSpecifiedTests --tests ${classes} --wait 10 --verbose
                             """
                         }
                         else if(validation == 'true') {
                             REQUEST = 'Validation'
                             echo "Running validation..."
                             bat """
-                            sf project deploy validate --target-org andreaflorio88@yahoo.it.new --manifest ${manifestPath} --test-level RunSpecifiedTests ${classes} --wait 10 --verbose --json
+                            sf project deploy validate --target-org andreaflorio88@yahoo.it.new --manifest ${manifestPath} --test-level RunSpecifiedTests --test ${classes} --wait 10 --verbose --json
                             """
                         } else {
                             echo "Running deploy without test class..."
