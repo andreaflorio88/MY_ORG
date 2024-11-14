@@ -71,7 +71,7 @@ pipeline {
                             REQUEST = 'Validation'
                             echo "Running validation..."
                             bat """
-                            sf project deploy validate --target-org andreaflorio88@yahoo.it.new --manifest ${manifestPath} --test-level RunSpecifiedTests --test ${classes} --wait 10 --verbose --json
+                            sf project deploy validate --target-org andreaflorio88@yahoo.it.new --manifest ${manifestPath} --test-level RunSpecifiedTests --tests ${classes} --wait 10 --verbose --json
                             """
                         } else {
                             echo "Running deploy without test class..."
