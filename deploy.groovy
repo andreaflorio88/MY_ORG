@@ -76,7 +76,7 @@ pipeline {
                         } else {
                             echo "Running deploy without test class..."
                             bat """
-                            sf project deploy start --target-org andreaflorio88@yahoo.it.new --manifest ${manifestPath} --wait 10 --verbose
+                            sf project deploy start --manifest ${manifestPath} --target-org 00D7R0000047XLo!AR0AQC0GgilI3xNcLgyd3lQKMg92Zb3GKH2DV0MrNJ2nUienO4B9qYaRGT3.2xfC1lmYMOeSAXJo1pRaktRSbPErlH3RQs3B
                             """
                         }
                     }
